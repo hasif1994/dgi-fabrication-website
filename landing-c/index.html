@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DGI — Custom Exhibit Fabrication</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500&family=Crimson+Text:ital@0;1&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'DM Sans', -apple-system, sans-serif;
+  background: #FAF7F2;
+  color: #2C2416;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+h1, h2 { font-family: 'Lexend', sans-serif; font-weight: 600; line-height: 1.2; }
+h3, h4 { font-family: 'Lexend', sans-serif; font-weight: 500; }
+h1 { font-size: clamp(2.5rem, 5vw, 3.75rem); }
+h2 { font-size: clamp(1.9rem, 3.5vw, 2.4rem); margin-bottom: 0.75rem; }
+h3 { font-size: 1.15rem; }
+a { color: #B5541C; text-decoration: none; }
+a:hover { color: #8B3A0F; }
+.container { max-width: 1160px; margin: 0 auto; padding: 0 2rem; }
+.dark-band { background: #1E1810; color: #F0E6D8; }
+
+/* NAV */
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(250,247,242,0.94); backdrop-filter: blur(10px); border-bottom: 1px solid #E8E0D5; padding: 0.85rem 0; }
+nav .container { display: flex; align-items: center; justify-content: space-between; }
+.nav-logo { height: 56px; }
+.nav-links { display: flex; gap: 2rem; align-items: center; }
+.nav-links a { color: #7A7265; font-size: 0.88rem; font-weight: 500; }
+.nav-links .btn { color: #FFF; }
+.nav-links a:hover { color: #2C2416; }
+.btn { display: inline-block; padding: 0.8rem 2rem; border-radius: 50px; font-family: 'Lexend', sans-serif; font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: all 0.25s; border: none; }
+.btn-primary { background: #B5541C; color: #FFF; }
+.btn-primary:hover { background: #8B3A0F; color: #FFF; }
+.btn-outline { border: 2px solid #B5541C; color: #B5541C; background: transparent; border-radius: 50px; }
+.btn-outline:hover { background: #B5541C; color: #FFF; }
+
+/* HERO SLIDER */
+#hero { position: relative; min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; overflow: hidden; }
+.hero-slide { position: absolute; inset: 0; background-size: cover; background-position: center; opacity: 0; transition: opacity 1s ease-in-out; }
+.hero-slide.active { opacity: 1; }
+.hero-overlay { position: absolute; inset: 0; background: linear-gradient(rgba(30,24,16,0.45), rgba(30,24,16,0.6)); z-index: 1; }
+.hero-content { position: relative; z-index: 2; max-width: 640px; }
+.hero-content h1 { color: #FAF7F2; margin-bottom: 1.25rem; }
+.hero-content p { font-size: 1.1rem; color: #D4C5B0; margin-bottom: 2.5rem; line-height: 1.7; }
+.hero-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+.hero-dots { position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%); z-index: 3; display: flex; gap: 0.75rem; }
+.hero-dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(250,247,242,0.3); cursor: pointer; transition: background 0.3s; }
+.hero-dot.active { background: #B5541C; }
+
+/* SECTION */
+section { padding: 5.5rem 0; }
+.section-header { text-align: center; margin-bottom: 3rem; }
+.section-header p { color: #7A7265; max-width: 600px; margin: 0.75rem auto 0; font-size: 1.05rem; line-height: 1.6; }
+
+/* INSET CARD */
+.inset-card { background: #FFF; border-radius: 16px; box-shadow: 0 2px 28px rgba(44,36,22,0.06); padding: 3.5rem; margin: 0 auto; max-width: 1100px; }
+
+/* SERVICES */
+.services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3rem; text-align: center; }
+.service-card { transition: transform 0.3s; }
+.service-card:hover { transform: translateY(-4px); }
+.service-circle { width: 200px; height: 200px; border-radius: 50%; margin: 0 auto 1.5rem; background-size: cover; background-position: center; border: 3px solid #E8D5C0; transition: border-color 0.3s, box-shadow 0.3s; }
+.service-card:hover .service-circle { border-color: #B5541C; box-shadow: 0 0 0 8px rgba(181,84,28,0.08); }
+.service-card h3 { margin-bottom: 0.6rem; color: #2C2416; font-size: 1.2rem; }
+.service-card p { color: #7A7265; font-size: 0.93rem; line-height: 1.6; max-width: 280px; margin: 0 auto; }
+
+/* ABOUT */
+.about-card { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
+.about-text p { color: #5C5242; font-size: 1.05rem; margin-bottom: 1.25rem; line-height: 1.7; }
+.stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem; margin-top: 2rem; }
+.stat { text-align: center; padding: 1.25rem 0.5rem; }
+.stat-num { font-family: 'Lexend', sans-serif; font-size: 2rem; color: #3E5C4A; font-weight: 700; }
+.stat-label { font-size: 0.82rem; color: #7A7265; margin-top: 0.25rem; }
+.about-img { background-size: cover; background-position: center; border-radius: 16px; height: 420px; }
+
+/* PORTFOLIO */
+.portfolio-grid { columns: 3; column-gap: 1.25rem; }
+.project-card { break-inside: avoid; margin-bottom: 1.25rem; position: relative; border-radius: 14px; overflow: hidden; cursor: pointer; }
+.project-card:hover .project-overlay { opacity: 1; }
+.project-img { width: 100%; display: block; }
+.project-overlay { position: absolute; inset: 0; background: linear-gradient(transparent 35%, rgba(30,24,16,0.9)); display: flex; flex-direction: column; justify-content: flex-end; padding: 1.5rem; opacity: 0; transition: opacity 0.3s; border-radius: 14px; }
+.project-overlay h4 { font-family: 'Lexend', sans-serif; font-size: 1rem; color: #FAF7F2; font-weight: 600; }
+.project-overlay span { font-size: 0.78rem; color: #D4944A; margin-top: 0.3rem; }
+
+/* MATERIALS */
+.materials-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+.materials-left { padding: 4rem 3rem; }
+.materials-left h2 { color: #FAF7F2; margin-bottom: 1rem; }
+.materials-left p { color: #C8B8A0; font-size: 1.05rem; margin-bottom: 1.5rem; }
+.materials-right { padding: 4rem 3rem; display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem 2rem; align-content: start; }
+.mat-item { color: #C8B8A0; font-size: 0.9rem; padding: 0.4rem 0; border-bottom: 1px solid rgba(200,184,160,0.12); }
+
+/* PROCESS */
+.process-wrapper { position: relative; max-width: 900px; margin: 0 auto; }
+.process-line { position: absolute; top: 40px; left: 60px; right: 60px; height: 2px; background: #D4C5B0; z-index: 0; }
+.process-steps { display: flex; justify-content: space-between; position: relative; z-index: 1; }
+.process-step { text-align: center; width: 180px; }
+.process-box { width: 80px; height: 80px; border-radius: 18px; background: #FFF; border: 2px solid #E8D5C0; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; font-size: 1.3rem; font-weight: 700; color: #B5541C; font-family: 'Lexend', sans-serif; transition: border-color 0.3s; }
+.process-step:hover .process-box { border-color: #B5541C; }
+.process-step h4 { color: #2C2416; margin-bottom: 0.5rem; font-size: 0.95rem; }
+.process-step p { color: #7A7265; font-size: 0.85rem; line-height: 1.5; }
+
+/* TESTIMONIALS */
+.testimonial-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+.testimonial-card { background: #FFF; padding: 2.5rem; border-radius: 16px; box-shadow: 0 2px 20px rgba(44,36,22,0.05); }
+.testimonial-card .quote { font-family: 'Crimson Text', serif; font-style: italic; font-size: 1.1rem; color: #2C2416; margin-bottom: 1.25rem; line-height: 1.55; }
+.testimonial-card .author { font-weight: 600; color: #2C2416; font-size: 0.9rem; }
+.testimonial-card .role { color: #B5541C; font-size: 0.8rem; }
+
+/* FAQ */
+.faq-list { max-width: 750px; margin: 0 auto; }
+.faq-item { border-bottom: 1px solid #E8E0D5; }
+.faq-question { width: 100%; background: none; border: none; color: #2C2416; font-family: 'Lexend', sans-serif; font-size: 0.95rem; font-weight: 500; padding: 1.25rem 0; text-align: left; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+.faq-question::after { content: '+'; color: #B5541C; font-size: 1.25rem; }
+.faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+.faq-answer p { color: #7A7265; padding-bottom: 1.25rem; line-height: 1.6; font-size: 0.95rem; }
+
+/* CONTACT */
+.contact-wrap { text-align: center; max-width: 600px; margin: 0 auto 3rem; }
+.contact-details { display: flex; justify-content: center; gap: 2.5rem; flex-wrap: wrap; margin: 1.5rem 0; }
+.contact-detail { color: #F0E6D8; font-size: 1rem; }
+.contact-detail strong { color: #D4944A; display: block; margin-bottom: 0.2rem; }
+.contact-form { background: #2A2218; border-radius: 16px; padding: 2.25rem; max-width: 600px; margin: 0 auto; }
+.form-group { margin-bottom: 1.1rem; }
+.form-group label { display: block; font-size: 0.72rem; color: #A89880; margin-bottom: 0.35rem; text-transform: uppercase; letter-spacing: 0.08em; font-family: 'Lexend', sans-serif; font-weight: 500; }
+.form-group input, .form-group textarea, .form-group select { width: 100%; padding: 0.8rem 1rem; background: #1E1810; border: 1px solid #3D3228; border-radius: 10px; color: #F0E6D8; font-family: 'DM Sans', sans-serif; font-size: 0.93rem; }
+.form-group input:focus, .form-group textarea:focus { outline: none; border-color: #B5541C; }
+.form-group textarea { resize: vertical; min-height: 110px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+/* FOOTER */
+footer { background: #151010; padding: 3rem 0 1.5rem; color: #A89880; }
+.footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 3rem; margin-bottom: 2rem; }
+.footer-logo { height: 48px; margin-bottom: 0.75rem; }
+.footer-col h4 { color: #F0E6D8; margin-bottom: 1rem; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.08em; font-family: 'Lexend', sans-serif; }
+.footer-col p, .footer-col a { color: #A89880; font-size: 0.88rem; line-height: 1.8; display: block; }
+.footer-col a:hover { color: #D4944A; }
+.footer-bottom { border-top: 1px solid #2A2020; padding-top: 1.5rem; display: flex; justify-content: space-between; color: #6A5A50; font-size: 0.8rem; }
+
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .services-grid { grid-template-columns: 1fr; }
+  .about-card, .materials-grid { grid-template-columns: 1fr; }
+  .stats-row { grid-template-columns: repeat(2, 1fr); }
+  .portfolio-grid { columns: 2; }
+  .process-steps { flex-direction: column; align-items: center; gap: 2rem; }
+  .process-line { display: none; }
+  .testimonial-grid { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr; }
+  .form-row { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="container">
+    <a href="#"><img src="../Assets/logos/DGI-LOGO%20(Black).png" alt="DGI" class="nav-logo"></a>
+    <div class="nav-links">
+      <a href="#work">Work</a>
+      <a href="#services">Services</a>
+      <a href="#about">About</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contact">Contact</a>
+      <a href="#contact" class="btn btn-primary">Get a Quote</a>
+    </div>
+  </div>
+</nav>
+
+<section id="hero">
+  <div class="hero-slide active" style="background-image:url('../Assets/images/7.png');"></div>
+  <div class="hero-slide" style="background-image:url('../Assets/images/8.png');"></div>
+  <div class="hero-slide" style="background-image:url('../Assets/images/9.png');"></div>
+  <div class="hero-slide" style="background-image:url('../Assets/images/10.png');"></div>
+  <div class="hero-slide" style="background-image:url('../Assets/images/11.png');"></div>
+  <div class="hero-overlay"></div>
+  <div class="container">
+    <div class="hero-content">
+      <h1>Lorem ipsum dolor sit amet consectetur.</h1>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
+      <div class="hero-btns">
+        <a href="#work" class="btn btn-primary">View Our Work</a>
+        <a href="#contact" class="btn btn-outline" style="border-color:#FAF7F2;color:#FAF7F2;">Request Quote</a>
+      </div>
+    </div>
+  </div>
+  <div class="hero-dots">
+    <span class="hero-dot active" data-index="0"></span>
+    <span class="hero-dot" data-index="1"></span>
+    <span class="hero-dot" data-index="2"></span>
+    <span class="hero-dot" data-index="3"></span>
+    <span class="hero-dot" data-index="4"></span>
+  </div>
+</section>
+
+<section id="services" style="padding-bottom:2rem;">
+  <div class="container">
+    <div class="section-header">
+      <h2>Lorem ipsum dolor sit amet.</h2>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-circle" style="background-image:url('../Assets/images/4.png');"></div>
+        <h3>Exhibit Fabrication</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-circle" style="background-image:url('../Assets/images/5.png');"></div>
+        <h3>Custom Millwork</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-circle" style="background-image:url('../Assets/images/6.png');"></div>
+        <h3>On-Site Installation</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="container">
+    <div class="inset-card">
+      <div class="about-card">
+        <div class="about-text">
+          <h2>Lorem ipsum dolor sit amet.</h2>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+          <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          <div class="stats-row">
+            <div class="stat"><div class="stat-num">19+</div><div class="stat-label">Lorem ipsum</div></div>
+            <div class="stat"><div class="stat-num">35K</div><div class="stat-label">Lorem ipsum</div></div>
+            <div class="stat"><div class="stat-num">80+</div><div class="stat-label">Lorem ipsum</div></div>
+            <div class="stat"><div class="stat-num">2,400</div><div class="stat-label">Lorem ipsum</div></div>
+          </div>
+        </div>
+        <div class="about-img" style="background-image:url('../Assets/images/1.png');"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="work">
+  <div class="container">
+    <div class="section-header">
+      <h2>Lorem ipsum dolor sit amet.</h2>
+    </div>
+    <div class="portfolio-grid">
+      <div class="project-card"><img src="../Assets/images/10.png" class="project-img" alt="Project"><div class="project-overlay"><h4>Lorem Ipsum</h4><span>30x40 &middot; 1200 SQ FT</span></div></div>
+      <div class="project-card"><img src="../Assets/images/11.png" class="project-img" alt="Project"><div class="project-overlay"><h4>Dolor Sit Amet</h4><span>20x20 &middot; 400 SQ FT</span></div></div>
+      <div class="project-card"><img src="../Assets/images/12.png" class="project-img" alt="Project"><div class="project-overlay"><h4>Consectetur</h4><span>20x30 &middot; 600 SQ FT</span></div></div>
+      <div class="project-card"><img src="../Assets/images/2.png" class="project-img" alt="Project"><div class="project-overlay"><h4>Adipiscing Elit</h4><span>10x20 &middot; 200 SQ FT</span></div></div>
+      <div class="project-card"><img src="../Assets/images/3.png" class="project-img" alt="Project"><div class="project-overlay"><h4>Eiusmod Tempor</h4><span>10x10 &middot; 100 SQ FT</span></div></div>
+      <div class="project-card"><img src="../Assets/images/8.png" class="project-img" alt="Project"><div class="project-overlay"><h4>Incididunt Ut</h4><span>20x20 &middot; 400 SQ FT</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="dark-band">
+  <div class="container">
+    <div class="materials-grid">
+      <div class="materials-left">
+        <h2>Lorem ipsum dolor sit amet.</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
+      </div>
+      <div class="materials-right">
+        <span class="mat-item">Lorem Ipsum Dolor</span>
+        <span class="mat-item">Sit Amet Consectetur</span>
+        <span class="mat-item">Adipiscing Elit</span>
+        <span class="mat-item">Sed Do Eiusmod</span>
+        <span class="mat-item">Tempor Incididunt</span>
+        <span class="mat-item">Ut Labore Et Dolore</span>
+        <span class="mat-item">Magna Aliqua</span>
+        <span class="mat-item">Ut Enim Ad Minim</span>
+        <span class="mat-item">Veniam Quis Nostrud</span>
+        <span class="mat-item">Exercitation Ullamco</span>
+        <span class="mat-item">Laboris Nisi Ut</span>
+        <span class="mat-item">Aliquip Ex Ea</span>
+        <span class="mat-item">Commodo Consequat</span>
+        <span class="mat-item">Duis Aute Irure</span>
+        <span class="mat-item">Dolor In Reprehenderit</span>
+        <span class="mat-item">Voluptate Velit Esse</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="process">
+  <div class="container">
+    <div class="section-header">
+      <h2>Lorem ipsum dolor sit amet.</h2>
+    </div>
+    <div class="process-wrapper">
+      <div class="process-line"></div>
+      <div class="process-steps">
+        <div class="process-step">
+          <div class="process-box">1</div>
+          <h4>Lorem Ipsum Dolor</h4>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod.</p>
+        </div>
+        <div class="process-step">
+          <div class="process-box">2</div>
+          <h4>Consectetur Adipiscing</h4>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod.</p>
+        </div>
+        <div class="process-step">
+          <div class="process-box">3</div>
+          <h4>Eiusmod Tempor</h4>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod.</p>
+        </div>
+        <div class="process-step">
+          <div class="process-box">4</div>
+          <h4>Incididunt Ut Labore</h4>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="testimonials" style="background:#FFF;">
+  <div class="container">
+    <div class="section-header">
+      <h2>Lorem ipsum dolor sit amet.</h2>
+    </div>
+    <div class="testimonial-grid">
+      <div class="testimonial-card">
+        <p class="quote">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</p>
+        <p class="author">Lorem Ipsum</p>
+        <p class="role">Dolor Sit Amet, Consectetur</p>
+      </div>
+      <div class="testimonial-card">
+        <p class="quote">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.</p>
+        <p class="author">Sunt Culpa</p>
+        <p class="role">Officia Deserunt, Mollit Anim</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="container">
+    <div class="section-header">
+      <h2>Lorem ipsum dolor sit amet?</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-question">Lorem ipsum dolor sit amet, consectetur adipiscing?</button>
+        <div class="faq-answer"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">Sed do eiusmod tempor incididunt ut labore?</button>
+        <div class="faq-answer"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">Ut enim ad minim veniam, quis nostrud?</button>
+        <div class="faq-answer"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Excepteur sint occaecat cupidatat.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">Duis aute irure dolor in reprehenderit?</button>
+        <div class="faq-answer"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">Excepteur sint occaecat cupidatat non proident?</button>
+        <div class="faq-answer"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sunt in culpa qui officia.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">Sunt in culpa qui officia deserunt mollit?</button>
+        <div class="faq-answer"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="dark-band">
+  <div class="container">
+    <div class="section-header">
+      <h2>Lorem ipsum dolor sit amet.</h2>
+    </div>
+    <div class="contact-wrap">
+      <div class="contact-details">
+        <div class="contact-detail"><strong>Email</strong>lorem@ipsumdolor.com</div>
+        <div class="contact-detail"><strong>Phone</strong>+1 (555) 000-0000</div>
+        <div class="contact-detail"><strong>Address</strong>2100 Lorem Ipsum Rd, Bay 21<br>Dolor Sit Amet, ST 89102</div>
+      </div>
+    </div>
+    <form class="contact-form">
+      <div class="form-row">
+        <div class="form-group"><label>Name</label><input type="text" placeholder="Lorem ipsum"></div>
+        <div class="form-group"><label>Company</label><input type="text" placeholder="Dolor sit amet"></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>Email</label><input type="email" placeholder="lorem@ipsum.com"></div>
+        <div class="form-group"><label>Phone</label><input type="tel" placeholder="(555) 000-0000"></div>
+      </div>
+      <div class="form-group"><label>Message</label><textarea placeholder="Lorem ipsum dolor sit amet..."></textarea></div>
+      <button type="submit" class="btn btn-primary" style="width:100%;">Send Inquiry</button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <img src="../Assets/logos/DGI-LOGO%20(Black).png" alt="DGI" class="footer-logo">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigate</h4>
+        <a href="#work">Portfolio</a>
+        <a href="#services">Services</a>
+        <a href="#about">About</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <a href="mailto:lorem@ipsumdolor.com">lorem@ipsumdolor.com</a>
+        <p>Mon – Fri &middot; 7am – 6pm</p>
+        <p>2100 Lorem Ipsum Rd, Bay 21<br>Dolor Sit Amet, ST 89102</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 DGI. Lorem ipsum dolor sit amet.</span>
+      <span>Lorem ipsum dolor sit amet consectetur.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+const slides = document.querySelectorAll('.hero-slide');
+const dots = document.querySelectorAll('.hero-dot');
+let current = 0;
+function goToSlide(index) {
+  slides.forEach(s => s.classList.remove('active'));
+  dots.forEach(d => d.classList.remove('active'));
+  slides[index].classList.add('active');
+  dots[index].classList.add('active');
+  current = index;
+}
+dots.forEach(dot => dot.addEventListener('click', () => goToSlide(parseInt(dot.dataset.index))));
+setInterval(() => goToSlide((current + 1) % slides.length), 4000);
+
+document.querySelectorAll('.faq-question').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const answer = btn.nextElementSibling;
+    const isOpen = answer.style.maxHeight;
+    document.querySelectorAll('.faq-answer').forEach(a => a.style.maxHeight = null);
+    document.querySelectorAll('.faq-question').forEach(q => q.style.fontWeight = '500');
+    if (!isOpen) {
+      answer.style.maxHeight = answer.scrollHeight + 'px';
+      btn.style.fontWeight = '600';
+    }
+  });
+});
+</script>
+</body>
+</html>

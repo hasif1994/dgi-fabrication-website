@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DGI — Custom Exhibit Fabrication</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Source Sans 3', -apple-system, sans-serif;
+  background: #FFFFFF;
+  color: #18181B;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3 { font-family: 'Montserrat', sans-serif; font-weight: 700; line-height: 1.2; }
+h1 { font-size: clamp(2.5rem, 5vw, 3.75rem); }
+h2 { font-size: clamp(1.9rem, 3.5vw, 2.5rem); margin-bottom: 0.75rem; }
+h3 { font-size: 1.15rem; }
+a { color: #2563EB; text-decoration: none; }
+a:hover { color: #1D4ED8; }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+.alt-bg { background: #F4F4F5; }
+.dark-band { background: #18181B; color: #FAFAFA; }
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(255,255,255,0.95); backdrop-filter: blur(10px);
+  border-bottom: 1px solid #E4E4E7;
+  padding: 1rem 0;
+}
+nav .container { display: flex; align-items: center; justify-content: space-between; }
+.logo { font-family: 'Montserrat', sans-serif; font-size: 1.4rem; font-weight: 700; color: #18181B; }
+.logo span { color: #2563EB; }
+.nav-links { display: flex; gap: 2rem; align-items: center; }
+.nav-links a { color: #71717A; font-size: 0.88rem; font-weight: 500; }
+.nav-links a:hover { color: #18181B; }
+.btn { display: inline-block; padding: 0.8rem 2rem; border-radius: 50px; font-family: 'Montserrat', sans-serif; font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: all 0.25s; border: none; letter-spacing: 0.01em; }
+.btn-primary { background: #2563EB; color: #FFF; }
+.btn-primary:hover { background: #1D4ED8; }
+.btn-outline { border: 2px solid #18181B; color: #18181B; background: transparent; border-radius: 50px; }
+.btn-outline:hover { background: #18181B; color: #FFF; }
+
+/* HERO */
+#hero {
+  min-height: 100vh; padding-top: 80px;
+  display: grid; grid-template-columns: 1fr 1fr; align-items: center;
+  background: #FFFFFF;
+}
+.hero-text { padding: 2rem 4rem 2rem 0; }
+.hero-text h1 { margin-bottom: 1.25rem; }
+.hero-text p { font-size: 1.1rem; color: #71717A; margin-bottom: 2.5rem; line-height: 1.7; }
+.hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+.hero-image { background: #F4F4F5; height: 100%; min-height: 600px; border-radius: 0 0 0 40px; display: flex; align-items: center; justify-content: center; color: #A1A1AA; font-family: 'Montserrat', sans-serif; font-size: 0.85rem; font-weight: 600; }
+
+/* SECTION */
+section { padding: 5.5rem 0; }
+.section-header { text-align: center; margin-bottom: 3rem; }
+.section-header p { color: #71717A; max-width: 600px; margin: 0.75rem auto 0; font-size: 1.05rem; line-height: 1.6; }
+
+/* CLIENTS */
+#clients { padding: 2rem 0; background: #F4F4F5; }
+.client-logos { display: flex; justify-content: center; align-items: center; gap: 3rem; flex-wrap: wrap; }
+.client-logos span { font-size: 0.95rem; color: #A1A1AA; font-weight: 700; letter-spacing: 0.04em; font-family: 'Montserrat', sans-serif; }
+
+/* SERVICES */
+.services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3rem; text-align: center; }
+.service-card { transition: transform 0.3s; }
+.service-card:hover { transform: translateY(-4px); }
+.service-circle { width: 200px; height: 200px; border-radius: 50%; background: #FFF; border: 2px solid #E4E4E7; margin: 0 auto 1.5rem; display: flex; align-items: center; justify-content: center; transition: border-color 0.3s, box-shadow 0.3s; }
+.service-card:hover .service-circle { border-color: #2563EB; box-shadow: 0 0 0 8px rgba(37,99,235,0.06); }
+.service-circle-inner { width: 96px; height: 96px; border-radius: 50%; background: #EFF6FF; display: flex; align-items: center; justify-content: center; color: #2563EB; font-size: 1.8rem; }
+.service-card h3 { margin-bottom: 0.6rem; font-size: 1.2rem; }
+.service-card p { color: #71717A; font-size: 0.93rem; line-height: 1.6; max-width: 280px; margin: 0 auto; }
+
+/* ABOUT */
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+.about-text p { color: #52525B; font-size: 1.05rem; margin-bottom: 1.25rem; line-height: 1.7; }
+.stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-top: 2rem; }
+.stat { text-align: center; padding: 1.25rem 0.5rem; }
+.stat-num { font-family: 'Montserrat', sans-serif; font-size: 2rem; color: #2563EB; font-weight: 700; }
+.stat-label { font-size: 0.82rem; color: #71717A; margin-top: 0.25rem; }
+.about-img { background: #F4F4F5; border-radius: 16px; height: 440px; display: flex; align-items: center; justify-content: center; color: #A1A1AA; font-family: 'Montserrat', sans-serif; font-size: 0.85rem; }
+
+/* PORTFOLIO */
+.portfolio-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+.project-card { position: relative; border-radius: 14px; overflow: hidden; aspect-ratio: 4/3; background: #FFF; cursor: pointer; transition: transform 0.3s, box-shadow 0.3s; }
+.project-card:hover { transform: translateY(-4px); box-shadow: 0 8px 30px rgba(0,0,0,0.1); }
+.project-card:hover .project-overlay { opacity: 1; }
+.project-img { width: 100%; height: 100%; display: block; }
+.project-overlay { position: absolute; inset: 0; background: linear-gradient(transparent 35%, rgba(24,24,27,0.9)); display: flex; flex-direction: column; justify-content: flex-end; padding: 1.5rem; opacity: 0; transition: opacity 0.3s; border-radius: 14px; }
+.project-overlay h4 { font-family: 'Montserrat', sans-serif; font-size: 1rem; color: #FFF; }
+.project-overlay span { font-size: 0.78rem; color: #93C5FD; margin-top: 0.3rem; }
+
+/* CAPABILITIES */
+.caps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+.cap-card { background: #FFF; border: 1px solid #E4E4E7; border-radius: 16px; padding: 2rem 1.75rem; text-align: center; transition: box-shadow 0.3s, transform 0.2s; }
+.cap-card:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.06); transform: translateY(-3px); }
+.cap-icon { width: 64px; height: 64px; border-radius: 50%; background: #EFF6FF; color: #2563EB; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; font-size: 1.35rem; }
+.cap-card h4 { font-family: 'Montserrat', sans-serif; font-size: 0.95rem; font-weight: 600; margin-bottom: 0.5rem; }
+.cap-card p { color: #71717A; font-size: 0.85rem; line-height: 1.5; }
+
+/* PROCESS */
+.process-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+.process-step { text-align: center; }
+.step-circle { width: 72px; height: 72px; border-radius: 50%; border: 2px solid #2563EB; background: #18181B; color: #2563EB; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.25rem; font-size: 1.25rem; font-weight: 700; font-family: 'Montserrat', sans-serif; }
+.process-step h4 { color: #FAFAFA; margin-bottom: 0.5rem; font-size: 1rem; }
+.process-step p { color: #A1A1AA; font-size: 0.88rem; line-height: 1.5; }
+
+/* TEAM */
+.team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+.team-card { text-align: center; }
+.team-photo { width: 140px; height: 140px; border-radius: 50%; background: #F4F4F5; margin: 0 auto 1.25rem; display: flex; align-items: center; justify-content: center; color: #A1A1AA; font-size: 0.75rem; }
+.team-card h4 { font-family: 'Montserrat', sans-serif; font-size: 1rem; font-weight: 600; }
+.team-card .role { color: #2563EB; font-size: 0.85rem; font-weight: 500; margin-top: 0.25rem; }
+.team-photo-full { background: #F4F4F5; border-radius: 16px; height: 280px; margin-top: 2.5rem; display: flex; align-items: center; justify-content: center; color: #A1A1AA; font-family: 'Montserrat', sans-serif; font-size: 0.85rem; }
+
+/* TESTIMONIAL */
+.testimonial-block { text-align: center; max-width: 680px; margin: 0 auto; }
+.testimonial-block .quote-icon { display: block; font-size: 3rem; color: #2563EB; font-family: 'Montserrat', sans-serif; margin-bottom: -0.5rem; }
+.testimonial-quote { font-family: 'Montserrat', sans-serif; font-size: 1.35rem; font-weight: 500; color: #18181B; margin-bottom: 1.5rem; line-height: 1.55; }
+.testimonial-author { font-weight: 600; color: #18181B; }
+.testimonial-role { color: #71717A; font-size: 0.85rem; }
+
+/* FAQ */
+.faq-list { max-width: 750px; margin: 0 auto; }
+.faq-item { border-bottom: 1px solid #E4E4E7; }
+.faq-question { width: 100%; background: none; border: none; color: #18181B; font-family: 'Montserrat', sans-serif; font-size: 0.95rem; font-weight: 600; padding: 1.25rem 0; text-align: left; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+.faq-question::after { content: '+'; color: #2563EB; font-size: 1.25rem; }
+.faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+.faq-answer p { color: #71717A; padding-bottom: 1.25rem; line-height: 1.6; font-size: 0.95rem; }
+
+/* CONTACT */
+.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+.contact-info h2 { color: #FAFAFA; margin-bottom: 1rem; }
+.contact-info > p { color: #A1A1AA; margin-bottom: 1.5rem; line-height: 1.7; }
+.contact-detail { margin-bottom: 0.75rem; color: #FAFAFA; font-size: 0.95rem; }
+.contact-form { background: #FFF; border-radius: 16px; padding: 2.25rem; }
+.form-group { margin-bottom: 1.1rem; }
+.form-group label { display: block; font-size: 0.75rem; color: #71717A; margin-bottom: 0.35rem; text-transform: uppercase; letter-spacing: 0.06em; font-family: 'Montserrat', sans-serif; font-weight: 600; }
+.form-group input, .form-group textarea, .form-group select { width: 100%; padding: 0.8rem 1rem; background: #FFF; border: 1px solid #E4E4E7; border-radius: 10px; color: #18181B; font-family: 'Source Sans 3', sans-serif; font-size: 0.93rem; }
+.form-group input:focus, .form-group textarea:focus { outline: none; border-color: #2563EB; box-shadow: 0 0 0 3px rgba(37,99,235,0.08); }
+.form-group textarea { resize: vertical; min-height: 110px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.regions-list { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.5rem; }
+.region-tag { background: #27272A; padding: 0.4rem 1rem; border-radius: 50px; font-size: 0.8rem; font-weight: 500; color: #A1A1AA; }
+
+/* FOOTER */
+footer { background: #18181B; padding: 3rem 0 1.5rem; }
+.footer-grid { display: grid; grid-template-columns: 1.5fr 0.8fr 0.8fr 1fr; gap: 2.5rem; margin-bottom: 2rem; }
+.footer-col h4 { color: #FAFAFA; margin-bottom: 1rem; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.06em; font-family: 'Montserrat', sans-serif; }
+.footer-col p, .footer-col a { color: #A1A1AA; font-size: 0.88rem; line-height: 1.8; display: block; }
+.footer-col a:hover { color: #60A5FA; }
+.footer-bottom { border-top: 1px solid #27272A; padding-top: 1.5rem; display: flex; justify-content: space-between; color: #71717A; font-size: 0.8rem; }
+
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  #hero { grid-template-columns: 1fr; }
+  .hero-text { padding: 2rem 0; order: 1; }
+  .hero-image { min-height: 300px; border-radius: 0; order: 0; }
+  .services-grid, .caps-grid, .team-grid, .process-steps { grid-template-columns: 1fr; }
+  .about-grid, .contact-grid, .footer-grid { grid-template-columns: 1fr; }
+  .stats-row, .portfolio-grid { grid-template-columns: repeat(2, 1fr); }
+  .form-row { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="container">
+    <div class="logo">DGI<span>.</span></div>
+    <div class="nav-links">
+      <a href="#services">Services</a>
+      <a href="#portfolio">Work</a>
+      <a href="#about">About</a>
+      <a href="#team">Team</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contact">Contact</a>
+      <a href="#contact" class="btn btn-primary">Get a Quote</a>
+    </div>
+  </div>
+</nav>
+
+<section id="hero">
+  <div class="hero-text" style="margin-left:auto; max-width:560px;">
+    <h1>Precision fabrication for the exhibits industry.</h1>
+    <p>Trusted white-label partner to the world's leading tradeshow booth builders. Everything engineered, fabricated, and finished under one roof.</p>
+    <div class="hero-btns">
+      <a href="#contact" class="btn btn-primary">Request for Quotation</a>
+      <a href="#portfolio" class="btn btn-outline">See Our Work</a>
+    </div>
+  </div>
+  <div class="hero-image">Booth Photo</div>
+</section>
+
+<div id="clients">
+  <div class="container">
+    <div class="client-logos">
+      <span>METRO EXHIBITS</span>
+      <span>RS DISPLAYS</span>
+      <span>SKYLINE PARTNER</span>
+      <span>EXHIBIT WORKS</span>
+      <span>NUVO DESIGN</span>
+      <span>PREMIER BOOTHS</span>
+      <span>TRADE SHOW CO.</span>
+      <span>ATLAS EVENTS</span>
+    </div>
+  </div>
+</div>
+
+<section id="services">
+  <div class="container">
+    <div class="section-header">
+      <h2>Three disciplines, one shop floor.</h2>
+      <p>From CAD review to on-site install, every project runs through the same disciplined process under one roof.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-circle">
+          <div class="service-circle-inner">&#9874;</div>
+        </div>
+        <h3>Exhibit Fabrication</h3>
+        <p>Turnkey booth builds from CAD to crate. Structural framing, print graphics, integrated AV, and shipping-ready modular systems.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-circle">
+          <div class="service-circle-inner">&#9733;</div>
+        </div>
+        <h3>Custom Millwork</h3>
+        <p>Precision cabinetry, wall paneling, reception desks, and architectural details finished to spec in our climate-controlled shop.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-circle">
+          <div class="service-circle-inner">&#9872;</div>
+        </div>
+        <h3>On-Site Installation</h3>
+        <p>Certified I&D crews handle transport, install, dismantle, and storage nationwide. You keep the client, we deliver the floor.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="portfolio" class="alt-bg">
+  <div class="container">
+    <div class="section-header">
+      <h2>Recent booths, delivered on deadline.</h2>
+      <p>A selection of custom exhibits and millwork fabricated for industry-leading booth builders across North America.</p>
+    </div>
+    <div class="portfolio-grid">
+      <div class="project-card"><div class="project-img" style="background:linear-gradient(135deg,#DBEAFE,#BFDBFE);"></div><div class="project-overlay"><h4>TechVision Booth</h4><span>30x40 &middot; CES 2025</span></div></div>
+      <div class="project-card"><div class="project-img" style="background:linear-gradient(135deg,#D1FAE5,#A7F3D0);"></div><div class="project-overlay"><h4>GreenLeaf Exhibit</h4><span>20x20 &middot; KBIS 2024</span></div></div>
+      <div class="project-card"><div class="project-img" style="background:linear-gradient(135deg,#FEE2E2,#FECACA);"></div><div class="project-overlay"><h4>Nova Brands</h4><span>20x30 &middot; NRF 2025</span></div></div>
+      <div class="project-card"><div class="project-img" style="background:linear-gradient(135deg,#E0E7FF,#C7D2FE);"></div><div class="project-overlay"><h4>Atlas Corp</h4><span>10x20 &middot; IWF 2024</span></div></div>
+      <div class="project-card"><div class="project-img" style="background:linear-gradient(135deg,#FEF3C7,#FDE68A);"></div><div class="project-overlay"><h4>Summit Kitchen</h4><span>10x10 &middot; IBS 2025</span></div></div>
+      <div class="project-card"><div class="project-img" style="background:linear-gradient(135deg,#EDE9FE,#DDD6FE);"></div><div class="project-overlay"><h4>Pinnacle Tech</h4><span>20x20 &middot; EXHIBITOR 2025</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-text">
+        <h2>A shop built for the people who build the show.</h2>
+        <p>DGI is a fabrication house serving the tradeshow and experiential industry. We don't sell to end brands — we build for the design studios and booth builders who do.</p>
+        <p>Every project runs through the same disciplined process: CAD review, engineering signoff, dedicated project manager, and a white-glove pre-build in our own warehouse before it ever leaves the loading dock.</p>
+        <div class="stats-row">
+          <div class="stat"><div class="stat-num">19+</div><div class="stat-label">Years fabricating</div></div>
+          <div class="stat"><div class="stat-num">35K</div><div class="stat-label">Sq ft shop floor</div></div>
+          <div class="stat"><div class="stat-num">80+</div><div class="stat-label">Builder partners</div></div>
+          <div class="stat"><div class="stat-num">2,400</div><div class="stat-label">Exhibits shipped</div></div>
+        </div>
+      </div>
+      <div class="about-img">Workshop Photo</div>
+    </div>
+  </div>
+</section>
+
+<section id="capabilities" class="alt-bg">
+  <div class="container">
+    <div class="section-header">
+      <h2>Everything in-house. Nothing outsourced.</h2>
+    </div>
+    <div class="caps-grid">
+      <div class="cap-card">
+        <div class="cap-icon">&#9874;</div>
+        <h4>Wood Fabrication</h4>
+        <p>Baltic birch, MDF, solid hardwoods, veneers, laminates, and spray finishing in our climate-controlled shop.</p>
+      </div>
+      <div class="cap-card">
+        <div class="cap-icon">&#9881;</div>
+        <h4>Metal Fabrication</h4>
+        <p>Aluminum extrusion, steel framing, custom brackets, and welded structures built to engineering spec.</p>
+      </div>
+      <div class="cap-card">
+        <div class="cap-icon">&#9644;</div>
+        <h4>CNC Routing</h4>
+        <p>Multi-axis CNC routing for precision-cut panels, custom shapes, and complex geometries from your CAD files.</p>
+      </div>
+      <div class="cap-card">
+        <div class="cap-icon">&#9783;</div>
+        <h4>Graphics &amp; Printing</h4>
+        <p>UV flatbed printing, dye-sublimation fabric, vinyl application, and large-format graphic production.</p>
+      </div>
+      <div class="cap-card">
+        <div class="cap-icon">&#9889;</div>
+        <h4>AV &amp; LED Integration</h4>
+        <p>Monitor mounting, LED wall integration, lighting systems, and concealed cable management.</p>
+      </div>
+      <div class="cap-card">
+        <div class="cap-icon">&#9734;</div>
+        <h4>Pre-Build &amp; QA</h4>
+        <p>Full pre-build in our warehouse with photography, documentation, and quality signoff before crating.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="process" class="dark-band">
+  <div class="container">
+    <div class="section-header">
+      <h2>Every project, same disciplined process.</h2>
+    </div>
+    <div class="process-steps">
+      <div class="process-step">
+        <div class="step-circle">1</div>
+        <h4>Receive CAD &amp; Specs</h4>
+        <p>We review your files, confirm all specifications, and flag any engineering concerns before work begins.</p>
+      </div>
+      <div class="process-step">
+        <div class="step-circle">2</div>
+        <h4>Engineer &amp; Fabricate</h4>
+        <p>Everything is built, assembled, and refined — millwork, metal, graphics, and AV in one facility.</p>
+      </div>
+      <div class="process-step">
+        <div class="step-circle">3</div>
+        <h4>Pre-Build &amp; Inspect</h4>
+        <p>Full assembly, photography, and quality inspection in our warehouse before crating.</p>
+      </div>
+      <div class="process-step">
+        <div class="step-circle">4</div>
+        <h4>Ship, Install, Dismantle</h4>
+        <p>Logistics, on-site I&D, and post-show dismantle. You focus on the client relationship.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="team">
+  <div class="container">
+    <div class="section-header">
+      <h2>Builders, engineers, project leads.</h2>
+      <p>A tight leadership team with decades in millwork and exhibits, backed by a shop of certified craftspeople.</p>
+    </div>
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="team-photo">Photo</div>
+        <h4>Fernando Reyes</h4>
+        <p class="role">Founder &amp; CEO</p>
+      </div>
+      <div class="team-card">
+        <div class="team-photo">Photo</div>
+        <h4>Elena Vasquez</h4>
+        <p class="role">Head of Design &amp; Engineering</p>
+      </div>
+      <div class="team-card">
+        <div class="team-photo">Photo</div>
+        <h4>David Chen</h4>
+        <p class="role">Director of Production</p>
+      </div>
+    </div>
+    <div class="team-photo-full">Full Workshop Crew Photo</div>
+  </div>
+</section>
+
+<section id="testimonials" class="alt-bg">
+  <div class="container">
+    <div class="testimonial-block">
+      <span class="quote-icon">&ldquo;</span>
+      <p class="testimonial-quote">We've sent DGI our toughest builds for over eight years &mdash; complex millwork, tight deadlines, multi-show rollouts. They've never missed a ship date. Not once.</p>
+      <p class="testimonial-author">Michael Torres</p>
+      <p class="testimonial-role">Production Director, Metro Exhibits</p>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="container">
+    <div class="section-header">
+      <h2>Things partners ask before the first PO.</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-question">Do you work directly with end brands or only with booth builders?</button>
+        <div class="faq-answer"><p>We work exclusively with booth builders and design agencies. We are a white-label fabrication partner — you maintain the client relationship, we handle the build.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">What's a typical lead time for a custom exhibit build?</button>
+        <div class="faq-answer"><p>Standard lead time is 6-8 weeks from final CAD approval. Rush builds can be accommodated in as little as 3 weeks depending on complexity and shop capacity.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">Can you handle installation and dismantle on-site?</button>
+        <div class="faq-answer"><p>Yes. Our certified I&D teams operate nationwide across all major convention cities including Las Vegas, Orlando, Chicago, New York, and Los Angeles.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">Do you offer white-label pre-builds before shipping?</button>
+        <div class="faq-answer"><p>Every project gets a full pre-build in our warehouse. We photograph the assembled exhibit, document any notes, and ship only after everything passes inspection.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">What materials and finishes can you produce in-house?</button>
+        <div class="faq-answer"><p>We work with Baltic birch, MDF, solid hardwoods, aluminum extrusion, steel framing, acrylics, laminates, veneers, fabric tensioning, LED integration, and UV printing.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">How do we get a quote started?</button>
+        <div class="faq-answer"><p>Send us your CAD files and project brief. We'll return a detailed line-item estimate within 48 hours.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="dark-band">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="contact-info">
+        <h2>Start a project. Ship the show.</h2>
+        <p>Ready to discuss your next exhibit build? Reach out with your specs and we'll get a quote back within 48 hours.</p>
+        <p class="contact-detail">quotes@dgifab.com</p>
+        <p class="contact-detail">+1 (702) 555-0142</p>
+        <p style="margin-bottom:0.5rem;">2100 Industrial Rd, Bay 21, Las Vegas, NV 89102</p>
+        <p style="font-size:0.85rem;color:#71717A;margin-top:1.5rem;">Installation regions:</p>
+        <div class="regions-list">
+          <span class="region-tag">Las Vegas</span><span class="region-tag">Orlando</span><span class="region-tag">Chicago</span>
+          <span class="region-tag">New York</span><span class="region-tag">Los Angeles</span><span class="region-tag">Atlanta</span>
+          <span class="region-tag">Dallas</span><span class="region-tag">Toronto</span><span class="region-tag">Nashville</span>
+          <span class="region-tag">Boston</span><span class="region-tag">San Francisco</span>
+        </div>
+      </div>
+      <form class="contact-form">
+        <div class="form-row">
+          <div class="form-group"><label>Name</label><input type="text" placeholder="Your name"></div>
+          <div class="form-group"><label>Company</label><input type="text" placeholder="Your company"></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label>Email</label><input type="email" placeholder="you@company.com"></div>
+          <div class="form-group"><label>Phone</label><input type="tel" placeholder="(555) 000-0000"></div>
+        </div>
+        <div class="form-group"><label>Project Type</label><select><option>Select...</option><option>Exhibit Fabrication</option><option>Custom Millwork</option><option>I&D Services</option><option>Other</option></select></div>
+        <div class="form-group"><label>Message</label><textarea placeholder="Tell us about your project..."></textarea></div>
+        <button type="submit" class="btn btn-primary" style="width:100%;">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <div class="logo" style="margin-bottom:0.75rem;color:#FAFAFA;">DGI<span style="color:#2563EB;">.</span></div>
+        <p>Custom millwork and exhibits fabrication for the industry's leading booth builders since 2005.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigate</h4>
+        <a href="#services">Services</a>
+        <a href="#portfolio">Portfolio</a>
+        <a href="#about">About</a>
+        <a href="#team">Team</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <a href="#services">Exhibit Fabrication</a>
+        <a href="#services">Custom Millwork</a>
+        <a href="#services">On-Site Installation</a>
+        <a href="#services">Graphics &amp; Print</a>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <a href="mailto:quotes@dgifab.com">quotes@dgifab.com</a>
+        <p>Mon – Fri &middot; 7am – 6pm</p>
+        <p>2100 Industrial Rd, Bay 21<br>Las Vegas, NV 89102</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 DGI Fabrication. All rights reserved.</span>
+      <span>Built for booth builders. Not sold to end brands.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.querySelectorAll('.faq-question').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const answer = btn.nextElementSibling;
+    const isOpen = answer.style.maxHeight;
+    document.querySelectorAll('.faq-answer').forEach(a => a.style.maxHeight = null);
+    document.querySelectorAll('.faq-question').forEach(q => q.style.fontWeight = '600');
+    if (!isOpen) {
+      answer.style.maxHeight = answer.scrollHeight + 'px';
+      btn.style.fontWeight = '700';
+    }
+  });
+});
+</script>
+</body>
+</html>

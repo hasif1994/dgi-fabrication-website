@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DGI — Custom Exhibit Fabrication</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Inter', -apple-system, sans-serif;
+  background: #0D1117;
+  color: #E6E6E6;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3 { font-family: 'Playfair Display', serif; font-weight: 700; line-height: 1.2; }
+h1 { font-size: clamp(2.5rem, 5vw, 4rem); }
+h2 { font-size: clamp(1.9rem, 3.5vw, 2.6rem); margin-bottom: 0.75rem; }
+h3 { font-size: 1.25rem; }
+a { color: #D4944A; text-decoration: none; }
+a:hover { color: #E5B06E; }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(13,17,23,0.92); backdrop-filter: blur(12px);
+  border-bottom: 1px solid #21262D;
+  padding: 1rem 0;
+}
+nav .container { display: flex; align-items: center; justify-content: space-between; }
+.logo { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; color: #E6E6E6; }
+.logo span { color: #D4944A; }
+.nav-links { display: flex; gap: 2rem; align-items: center; }
+.nav-links a { color: #8B949E; font-size: 0.88rem; font-weight: 500; }
+.nav-links a:hover { color: #E6E6E6; }
+.btn { display: inline-block; padding: 0.8rem 2rem; border-radius: 50px; font-family: 'Inter', sans-serif; font-size: 0.88rem; font-weight: 600; cursor: pointer; transition: all 0.25s; border: none; }
+.btn-primary { background: #D4944A; color: #0D1117; }
+.btn-primary:hover { background: #E5B06E; }
+.btn-outline { border: 2px solid #D4944A; color: #D4944A; background: transparent; border-radius: 50px; }
+.btn-outline:hover { background: #D4944A; color: #0D1117; }
+
+/* HERO */
+#hero {
+  min-height: 100vh; display: flex; align-items: center; padding-top: 80px;
+  background: linear-gradient(135deg, rgba(13,17,23,0.55) 0%, rgba(13,17,23,0.78) 100%),
+              url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><rect fill="%23161B22" width="1200" height="800"/><rect fill="%2321262D" x="150" y="120" width="280" height="220" rx="12"/><rect fill="%23161B22" x="170" y="145" width="240" height="50" rx="6"/><rect fill="%23161B22" x="170" y="215" width="100" height="16" rx="4"/><rect fill="%23161B22" x="170" y="240" width="160" height="16" rx="4"/><rect fill="%23D4944A" x="170" y="280" width="110" height="36" rx="18" opacity="0.3"/><rect fill="%2321262D" x="480" y="120" width="560" height="560" rx="12"/><rect fill="%23161B22" x="510" y="160" width="500" height="180" rx="8"/><rect fill="%23161B22" x="510" y="370" width="180" height="16" rx="4"/><rect fill="%23161B22" x="510" y="400" width="260" height="16" rx="4"/></svg>');
+  background-size: cover; background-position: center;
+}
+.hero-content { max-width: 680px; }
+.hero-content h1 { margin-bottom: 1.25rem; }
+.hero-content p { font-size: 1.15rem; color: #8B949E; margin-bottom: 2.5rem; line-height: 1.7; }
+.hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+/* SECTION */
+section { padding: 6rem 0; }
+.section-header { text-align: center; margin-bottom: 3.5rem; }
+.section-header p { color: #8B949E; max-width: 600px; margin: 0.75rem auto 0; font-size: 1.05rem; line-height: 1.6; }
+
+/* CLIENTS */
+#clients { padding: 2.5rem 0; border-top: 1px solid #21262D; border-bottom: 1px solid #21262D; }
+.client-logos { display: flex; justify-content: center; align-items: center; gap: 3rem; flex-wrap: wrap; }
+.client-logos span { font-size: 1rem; color: #484F58; font-weight: 600; letter-spacing: 0.04em; }
+
+/* SERVICES */
+.services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3rem; text-align: center; }
+.service-card { transition: transform 0.3s; }
+.service-card:hover { transform: translateY(-4px); }
+.service-circle { width: 200px; height: 200px; border-radius: 50%; margin: 0 auto 1.5rem; display: flex; align-items: center; justify-content: center; position: relative; transition: border-color 0.3s, box-shadow 0.3s; }
+.service-card:nth-child(1) .service-circle { background: linear-gradient(135deg, #1a2233, #233044); border: 2px solid #21262D; }
+.service-card:nth-child(2) .service-circle { background: linear-gradient(135deg, #1a231a, #233024); border: 2px solid #21262D; }
+.service-card:nth-child(3) .service-circle { background: linear-gradient(135deg, #231a1e, #2a211c); border: 2px solid #21262D; }
+.service-card:hover .service-circle { border-color: #D4944A; box-shadow: 0 0 0 6px rgba(212,148,74,0.1); }
+.service-circle-inner { width: 100px; height: 100px; border-radius: 50%; border: 2px solid rgba(212,148,74,0.35); display: flex; align-items: center; justify-content: center; color: #D4944A; font-size: 1.8rem; }
+.service-body h3 { margin-bottom: 0.6rem; color: #E6E6E6; font-family: 'Playfair Display', serif; font-size: 1.3rem; }
+.service-body p { color: #8B949E; font-size: 0.93rem; line-height: 1.6; max-width: 280px; margin: 0 auto; }
+
+/* ABOUT */
+.about-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 3rem; align-items: center; }
+.about-text p { color: #8B949E; font-size: 1.05rem; margin-bottom: 1.5rem; line-height: 1.7; }
+.stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem; margin-top: 2rem; }
+.stat { text-align: center; padding: 1.5rem 1rem; background: #161B22; border: 1px solid #21262D; border-radius: 14px; }
+.stat-num { font-size: 1.85rem; color: #D4944A; font-weight: 700; font-family: 'Playfair Display', serif; }
+.stat-label { font-size: 0.82rem; color: #8B949E; margin-top: 0.3rem; }
+.about-img { background: linear-gradient(135deg, #161B22, #21262D); border-radius: 16px; height: 420px; display: flex; align-items: center; justify-content: center; color: #484F58; font-size: 0.85rem; }
+
+/* PORTFOLIO */
+#portfolio { background: #11161C; }
+.filter-bar { display: flex; justify-content: center; gap: 0.5rem; margin-bottom: 2.5rem; flex-wrap: wrap; }
+.filter-btn { background: transparent; border: 1.5px solid #30363D; color: #8B949E; padding: 0.55rem 1.35rem; border-radius: 50px; font-family: 'Inter', sans-serif; font-size: 0.82rem; font-weight: 500; cursor: pointer; transition: all 0.2s; }
+.filter-btn:hover, .filter-btn.active { border-color: #D4944A; color: #D4944A; }
+.portfolio-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+.project-card { position: relative; border-radius: 14px; overflow: hidden; aspect-ratio: 4/3; background: #161B22; cursor: pointer; transition: transform 0.3s; }
+.project-card:hover { transform: translateY(-4px); }
+.project-card:hover .project-overlay { opacity: 1; }
+.project-img { width: 100%; height: 100%; display: block; }
+.project-overlay { position: absolute; inset: 0; background: linear-gradient(transparent 35%, rgba(13,17,23,0.94)); display: flex; flex-direction: column; justify-content: flex-end; padding: 1.5rem; opacity: 0; transition: opacity 0.3s; border-radius: 14px; }
+.project-overlay h4 { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: #E6E6E6; }
+.project-overlay span { font-size: 0.8rem; color: #D4944A; margin-top: 0.3rem; }
+
+/* PROCESS */
+.process-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+.process-step { text-align: center; }
+.step-circle { width: 72px; height: 72px; border-radius: 50%; border: 2px solid #D4944A; background: #0D1117; color: #D4944A; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.25rem; font-size: 1.25rem; font-weight: 700; font-family: 'Playfair Display', serif; }
+.process-step h4 { color: #E6E6E6; margin-bottom: 0.5rem; font-size: 1rem; }
+.process-step p { color: #8B949E; font-size: 0.88rem; line-height: 1.55; }
+
+/* TESTIMONIAL */
+.testimonial-block { text-align: center; max-width: 720px; margin: 0 auto; }
+.testimonial-block .quote-icon { font-size: 3rem; color: #D4944A; display: block; margin-bottom: -0.5rem; font-family: 'Playfair Display', serif; }
+.testimonial-quote { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-style: italic; color: #E6E6E6; margin-bottom: 1.5rem; line-height: 1.5; }
+.testimonial-author { color: #D4944A; font-weight: 600; }
+.testimonial-role { color: #8B949E; font-size: 0.85rem; }
+
+/* FAQ */
+.faq-list { max-width: 750px; margin: 0 auto; }
+.faq-item { border-bottom: 1px solid #21262D; }
+.faq-question { width: 100%; background: none; border: none; color: #E6E6E6; font-family: 'Inter', sans-serif; font-size: 1rem; font-weight: 500; padding: 1.25rem 0; text-align: left; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+.faq-question::after { content: '+'; color: #D4944A; font-size: 1.25rem; font-weight: 300; }
+.faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+.faq-answer p { color: #8B949E; padding-bottom: 1.25rem; line-height: 1.6; font-size: 0.95rem; }
+
+/* CONTACT */
+#contact { background: #0A0E13; }
+.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+.contact-info h2 { margin-bottom: 1rem; }
+.contact-info > p { color: #8B949E; margin-bottom: 1.5rem; line-height: 1.7; }
+.contact-detail { margin-bottom: 0.75rem; color: #E6E6E6; font-size: 0.95rem; padding: 0.6rem 1rem; background: #161B22; border-radius: 50px; display: inline-block; }
+.contact-form { background: #161B22; border: 1px solid #21262D; border-radius: 16px; padding: 2.25rem; }
+.form-group { margin-bottom: 1.1rem; }
+.form-group label { display: block; font-size: 0.8rem; color: #8B949E; margin-bottom: 0.4rem; }
+.form-group input, .form-group textarea, .form-group select { width: 100%; padding: 0.8rem 1rem; background: #0D1117; border: 1px solid #21262D; border-radius: 10px; color: #E6E6E6; font-family: 'Inter', sans-serif; font-size: 0.93rem; }
+.form-group input:focus, .form-group textarea:focus { outline: none; border-color: #D4944A; }
+.form-group textarea { resize: vertical; min-height: 110px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+/* FOOTER */
+footer { background: #090C10; padding: 3rem 0 1.5rem; border-top: 1px solid #21262D; }
+.footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 3rem; margin-bottom: 2rem; }
+.footer-col h4 { color: #E6E6E6; margin-bottom: 1rem; font-size: 0.9rem; }
+.footer-col p, .footer-col a { color: #8B949E; font-size: 0.88rem; line-height: 1.8; display: block; }
+.footer-col a:hover { color: #D4944A; }
+.footer-bottom { border-top: 1px solid #21262D; padding-top: 1.5rem; display: flex; justify-content: space-between; color: #484F58; font-size: 0.8rem; }
+
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .services-grid, .process-steps { grid-template-columns: 1fr; }
+  .about-grid, .contact-grid, .footer-grid { grid-template-columns: 1fr; }
+  .stats-row, .portfolio-grid { grid-template-columns: repeat(2, 1fr); }
+  .form-row { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="container">
+    <div class="logo">DGI<span>.</span></div>
+    <div class="nav-links">
+      <a href="#services">Services</a>
+      <a href="#portfolio">Work</a>
+      <a href="#about">About</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contact">Contact</a>
+      <a href="#contact" class="btn btn-primary">Request Quote</a>
+    </div>
+  </div>
+</nav>
+
+<section id="hero">
+  <div class="container">
+    <div class="hero-content">
+      <h1>Booths that ship on time.<br>Every time.</h1>
+      <p>Trusted fabrication partner to the industry's leading tradeshow booth builders. Precision millwork, exhibit structures, and turnkey assembly — delivered on brief, on spec, on time.</p>
+      <div class="hero-btns">
+        <a href="#contact" class="btn btn-primary">Request for Quotation</a>
+        <a href="#portfolio" class="btn btn-outline">View Our Work</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="clients">
+  <div class="container">
+    <div class="client-logos">
+      <span>METRO EXHIBITS</span>
+      <span>RS DISPLAYS</span>
+      <span>SKYLINE PARTNER</span>
+      <span>EXHIBIT WORKS</span>
+      <span>NUVO DESIGN</span>
+      <span>PREMIER BOOTHS</span>
+      <span>TRADE SHOW CO.</span>
+    </div>
+  </div>
+</div>
+
+<section id="services">
+  <div class="container">
+    <div class="section-header">
+      <h2>Three disciplines, one shop floor.</h2>
+      <p>From white-box millwork to full-scale exhibit programs, everything is engineered, fabricated, and finished under one roof.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-circle">
+          <div class="service-circle-inner">&#9874;</div>
+        </div>
+        <div class="service-body">
+          <h3>Exhibit Fabrication</h3>
+          <p>Turnkey booth builds from CAD to crate. Structural framing, print graphics, integrated AV, and shipping-ready modular systems.</p>
+        </div>
+      </div>
+      <div class="service-card">
+        <div class="service-circle">
+          <div class="service-circle-inner">&#9733;</div>
+        </div>
+        <div class="service-body">
+          <h3>Custom Millwork</h3>
+          <p>Precision cabinetry, wall paneling, reception desks, and architectural details finished to spec in our climate-controlled shop.</p>
+        </div>
+      </div>
+      <div class="service-card">
+        <div class="service-circle">
+          <div class="service-circle-inner">&#9872;</div>
+        </div>
+        <div class="service-body">
+          <h3>On-Site Installation</h3>
+          <p>Certified I&D crews handle transport, install, dismantle, and storage nationwide. You keep the client, we deliver the floor.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-text">
+        <h2>A shop built for the people who build the show.</h2>
+        <p>DGI is a fabrication house serving the tradeshow and experiential industry. We don't sell to end brands — we build for the design studios and booth builders who do.</p>
+        <p>Every project runs through the same disciplined process: CAD review, engineering signoff, dedicated project manager, and a white-glove pre-build in our own warehouse before it ever leaves the loading dock. That's why our partners keep coming back for the campaigns that can't afford a miss.</p>
+        <div class="stats-row">
+          <div class="stat"><div class="stat-num">19+</div><div class="stat-label">Years fabricating</div></div>
+          <div class="stat"><div class="stat-num">35K</div><div class="stat-label">Sq ft of shop floor</div></div>
+          <div class="stat"><div class="stat-num">80+</div><div class="stat-label">Booth builder partners</div></div>
+          <div class="stat"><div class="stat-num">2,400</div><div class="stat-label">Exhibits shipped</div></div>
+        </div>
+      </div>
+      <div class="about-img">Workshop Photo</div>
+    </div>
+  </div>
+</section>
+
+<section id="portfolio">
+  <div class="container">
+    <div class="section-header">
+      <h2>Recent booths, delivered on deadline.</h2>
+      <p>A selection of custom exhibits and millwork fabricated for industry-leading booth builders across North America.</p>
+    </div>
+    <div class="filter-bar">
+      <button class="filter-btn active">All</button>
+      <button class="filter-btn">10x10</button>
+      <button class="filter-btn">10x20</button>
+      <button class="filter-btn">20x20</button>
+      <button class="filter-btn">20x30</button>
+      <button class="filter-btn">30x40+</button>
+    </div>
+    <div class="portfolio-grid">
+      <div class="project-card"><div class="project-img" style="background:linear-gradient(135deg,#1a2233,#233044);"></div><div class="project-overlay"><h4>TechVision Booth</h4><span>30x40 &middot; 1200 SQ FT &middot; CES 2025</span></div></div>
+      <div class="project-card"><div class="project-img" style="background:linear-gradient(135deg,#1a2a1e,#233024);"></div><div class="project-overlay"><h4>GreenLeaf Exhibit</h4><span>20x20 &middot; 400 SQ FT &middot; KBIS 2024</span></div></div>
+      <div class="project-card"><div class="project-img" style="background:linear-gradient(135deg,#231a1a,#302422);"></div><div class="project-overlay"><h4>Nova Brands Display</h4><span>20x30 &middot; 600 SQ FT &middot; NRF 2025</span></div></div>
+      <div class="project-card"><div class="project-img" style="background:linear-gradient(135deg,#1a1a23,#242430);"></div><div class="project-overlay"><h4>Atlas Corp Island</h4><span>10x20 &middot; 200 SQ FT &middot; IWF 2024</span></div></div>
+      <div class="project-card"><div class="project-img" style="background:linear-gradient(135deg,#1a231a,#243024);"></div><div class="project-overlay"><h4>Summit Kitchen</h4><span>10x10 &middot; 100 SQ FT &middot; IBS 2025</span></div></div>
+      <div class="project-card"><div class="project-img" style="background:linear-gradient(135deg,#231a23,#302430);"></div><div class="project-overlay"><h4>Pinnacle Tech Expo</h4><span>20x20 &middot; 400 SQ FT &middot; EXHIBITOR 2025</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="process">
+  <div class="container">
+    <div class="section-header">
+      <h2>Every project, same disciplined process.</h2>
+    </div>
+    <div class="process-steps">
+      <div class="process-step">
+        <div class="step-circle">1</div>
+        <h4>CAD Review & Engineering</h4>
+        <p>We review your CAD files, confirm all specs, and provide engineering feedback before a single cut is made.</p>
+      </div>
+      <div class="process-step">
+        <div class="step-circle">2</div>
+        <h4>In-House Fabrication</h4>
+        <p>Everything is built, assembled, and tested in our facility — millwork, metal, graphics, and AV integration.</p>
+      </div>
+      <div class="process-step">
+        <div class="step-circle">3</div>
+        <h4>Pre-Build & Quality Check</h4>
+        <p>Full assembly, photography, and quality inspection before crating with detailed setup documentation.</p>
+      </div>
+      <div class="process-step">
+        <div class="step-circle">4</div>
+        <h4>Ship to Show + Install</h4>
+        <p>We handle logistics, on-site I&D, and post-show dismantle. You focus on your client relationship.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="testimonials">
+  <div class="container">
+    <div class="testimonial-block">
+      <span class="quote-icon">&ldquo;</span>
+      <p class="testimonial-quote">We've sent DGI our toughest builds for over eight years &mdash; complex millwork, tight deadlines, multi-show rollouts. They've never missed a ship date. Not once.</p>
+      <p class="testimonial-author">Michael Torres</p>
+      <p class="testimonial-role">Production Director, Metro Exhibits</p>
+    </div>
+  </div>
+</section>
+
+<section id="faq" style="background:#11161C;">
+  <div class="container">
+    <div class="section-header">
+      <h2>Things partners ask before the first PO.</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-question">Do you work directly with end brands or only with booth builders?</button>
+        <div class="faq-answer"><p>We work exclusively with booth builders and design agencies. We are a white-label fabrication partner — you maintain the client relationship, we handle the build.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">What's a typical lead time for a custom exhibit build?</button>
+        <div class="faq-answer"><p>Standard lead time is 6-8 weeks from final CAD approval. Rush builds can be accommodated in as little as 3 weeks depending on complexity and shop capacity.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">Can you handle installation and dismantle on-site?</button>
+        <div class="faq-answer"><p>Yes. Our certified I&D teams operate nationwide across all major convention cities including Las Vegas, Orlando, Chicago, New York, and Los Angeles.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">Do you offer white-label pre-builds before shipping?</button>
+        <div class="faq-answer"><p>Every project gets a full pre-build in our warehouse. We photograph the assembled exhibit, document any notes, and ship only after everything passes inspection.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">What materials and finishes can you produce in-house?</button>
+        <div class="faq-answer"><p>We work with Baltic birch, MDF, solid hardwoods, aluminum extrusion, steel framing, acrylics, laminates, veneers, fabric tensioning, LED integration, and UV printing.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">How do we get a quote started?</button>
+        <div class="faq-answer"><p>Send us your CAD files and project brief. We'll return a detailed line-item estimate within 48 hours.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="contact-info">
+        <h2>Start a project. Ship the show.</h2>
+        <p>Ready to discuss your next exhibit build? Reach out with your specs and we'll get a quote back to you within 48 hours.</p>
+        <div class="contact-detail">quotes@dgifab.com</div>
+        <br>
+        <div class="contact-detail">+1 (702) 555-0142</div>
+        <br>
+        <p style="margin-top:1rem;">2100 Industrial Rd, Bay 21<br>Las Vegas, NV 89102</p>
+      </div>
+      <form class="contact-form">
+        <div class="form-row">
+          <div class="form-group"><label>Name</label><input type="text" placeholder="Your name"></div>
+          <div class="form-group"><label>Company</label><input type="text" placeholder="Your company"></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label>Email</label><input type="email" placeholder="you@company.com"></div>
+          <div class="form-group"><label>Phone</label><input type="tel" placeholder="(555) 000-0000"></div>
+        </div>
+        <div class="form-group"><label>Project Type</label><select><option>Select...</option><option>Exhibit Fabrication</option><option>Custom Millwork</option><option>I&D Services</option><option>Other</option></select></div>
+        <div class="form-group"><label>Message</label><textarea placeholder="Tell us about your project..."></textarea></div>
+        <button type="submit" class="btn btn-primary" style="width:100%;">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <div class="logo" style="margin-bottom:0.75rem;">DGI<span>.</span></div>
+        <p>Custom millwork and exhibits fabrication for the industry's leading booth builders since 2005.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigate</h4>
+        <a href="#services">Services</a>
+        <a href="#portfolio">Portfolio</a>
+        <a href="#about">About</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <a href="mailto:quotes@dgifab.com">quotes@dgifab.com</a>
+        <p>Mon – Fri &middot; 7am – 6pm</p>
+        <p>2100 Industrial Rd, Bay 21<br>Las Vegas, NV 89102</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 DGI Fabrication. All rights reserved.</span>
+      <span>Built for booth builders. Not sold to end brands.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.querySelectorAll('.faq-question').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const answer = btn.nextElementSibling;
+    const isOpen = answer.style.maxHeight;
+    document.querySelectorAll('.faq-answer').forEach(a => a.style.maxHeight = null);
+    document.querySelectorAll('.faq-question').forEach(q => q.style.fontWeight = '500');
+    if (!isOpen) {
+      answer.style.maxHeight = answer.scrollHeight + 'px';
+      btn.style.fontWeight = '600';
+    }
+  });
+});
+</script>
+</body>
+</html>
