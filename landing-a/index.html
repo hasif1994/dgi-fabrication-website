@@ -6,18 +6,21 @@
 <title>Lorem Ipsum Dolor — Sit Amet Consectetur</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;600;700&family=Public+Sans:wght@400;500;600;700&family=Lora:wght@400;600;700&family=Atkinson+Hyperlegible+Next:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,400;600;700&family=Archivo:wght@400;500;600;700&family=Newsreader:wght@400;600;700&family=Karla:wght@400;500;600;700&family=Libre+Caslon+Text:wght@400;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=Domine:wght@400;600;700&family=Schibsted+Grotesk:wght@400;500;600;700&family=Bitter:wght@400;600;700&family=Nunito+Sans:wght@400;500;600;700&family=Crimson+Pro:wght@400;600;700&family=Zilla+Slab:wght@400;600;700&family=Georgia:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
-body {
-  font-family: 'Inter', -apple-system, sans-serif;
-  background: #0D1117;
-  color: #E6E6E6;
-  line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
+:root {
+  --heading-font: 'Playfair Display', serif;
+  --body-font: 'Inter', -apple-system, sans-serif;
 }
-h1, h2, h3 { font-family: 'Playfair Display', serif; font-weight: 700; line-height: 1.2; }
+body {
+  font-family: var(--body-font);
+  color: #0D1117;
+  background: #FFF;
+  line-height: 1.6;
+}
+h1, h2, h3 { font-family: var(--heading-font); font-weight: 700; line-height: 1.2; }
 h1 { font-size: clamp(2.5rem, 5vw, 4rem); }
 h2 { font-size: clamp(1.9rem, 3.5vw, 2.6rem); margin-bottom: 0.75rem; }
 h3 { font-size: 1.25rem; }
@@ -33,7 +36,7 @@ nav .container { display: flex; align-items: center; justify-content: center; ga
 .nav-links a { color: #8B949E; font-size: 0.88rem; font-weight: 500; }
 .nav-links .btn { color: #FFF; }
 .nav-links a:hover { color: #E6E6E6; }
-.btn { display: inline-block; padding: 0.8rem 2rem; border-radius: 50px; font-family: 'Inter', sans-serif; font-size: 0.88rem; font-weight: 600; cursor: pointer; transition: all 0.25s; border: none; }
+.btn { display: inline-block; padding: 0.8rem 2rem; border-radius: 50px; font-family: var(--body-font); font-size: 0.88rem; font-weight: 600; cursor: pointer; transition: all 0.25s; border: none; }
 .btn-primary { background: #D4944A; color: #FFF; }
 .btn-primary:hover { background: #E5B06E; color: #FFF; }
 .btn-full { display: block; width: 100%; padding: 1rem 2rem; min-height: 50px; box-sizing: border-box; }
@@ -71,8 +74,8 @@ section { padding: 6rem 0; }
 .service-panel:hover .service-panel-bg { transform: scale(1.05); }
 .service-panel-overlay { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(13,17,23,0.3) 0%, rgba(13,17,23,0.85) 100%); }
 .service-panel-content { position: absolute; bottom: 0; left: 0; right: 0; padding: 2rem; z-index: 2; }
-.service-panel-num { font-family: 'Playfair Display', serif; font-size: 3rem; color: rgba(212,148,74,0.3); font-weight: 700; line-height: 1; margin-bottom: 0.5rem; }
-.service-panel h3 { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: #FFF; margin-bottom: 0.5rem; }
+.service-panel-num { font-family: var(--heading-font); font-size: 3rem; color: rgba(212,148,74,0.3); font-weight: 700; line-height: 1; margin-bottom: 0.5rem; }
+.service-panel h3 { font-family: var(--heading-font); font-size: 1.4rem; color: #FFF; margin-bottom: 0.5rem; }
 .service-panel p { color: rgba(230,230,230,0.85); font-size: 0.9rem; line-height: 1.5; }
 
 /* ABOUT */
@@ -80,7 +83,7 @@ section { padding: 6rem 0; }
 .about-text p { color: #8B949E; font-size: 1.05rem; margin-bottom: 1.5rem; line-height: 1.7; }
 .stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem; margin-top: 2rem; }
 .stat { text-align: center; padding: 1.5rem 1rem; background: #161B22; border: 1px solid #21262D; border-radius: 14px; }
-.stat-num { font-size: 1.85rem; color: #D4944A; font-weight: 700; font-family: 'Playfair Display', serif; }
+.stat-num { font-size: 1.85rem; color: #D4944A; font-weight: 700; font-family: var(--heading-font); }
 .stat-label { font-size: 0.82rem; color: #8B949E; margin-top: 0.3rem; }
 .about-img { background-size: cover; background-position: center; border-radius: 16px; height: 420px; }
 
@@ -92,7 +95,7 @@ section { padding: 6rem 0; }
 .project-card:hover .project-overlay { opacity: 1; }
 .project-img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .project-overlay { position: absolute; inset: 0; background: linear-gradient(transparent 35%, rgba(13,17,23,0.94)); display: flex; flex-direction: column; justify-content: flex-end; padding: 1.5rem; opacity: 0; transition: opacity 0.3s; border-radius: 14px; }
-.project-overlay h4 { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: #E6E6E6; }
+.project-overlay h4 { font-family: var(--heading-font); font-size: 1.1rem; color: #E6E6E6; }
 .project-overlay span { font-size: 0.8rem; color: #D4944A; margin-top: 0.3rem; }
 
 /* PROCESS */
@@ -102,14 +105,14 @@ section { padding: 6rem 0; }
 .process-step { position: relative; width: 200px; text-align: center; }
 .process-card { background: #161B22; border: 2px solid #21262D; border-radius: 16px; padding: 55px 1.5rem 1.5rem; transition: border-color 0.3s, box-shadow 0.3s; position: relative; z-index: 1; }
 .process-step:hover .process-card { border-color: #D4944A; box-shadow: 0 8px 32px rgba(212,148,74,0.15); }
-.process-number { position: absolute; top: -25px; left: 50%; transform: translateX(-50%); width: 50px; height: 50px; border-radius: 50%; background: #D4944A; color: #0D1117; font-size: 1.4rem; font-weight: 700; font-family: 'Playfair Display', serif; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 20px rgba(212,148,74,0.4); z-index: 2; }
-.process-step h4 { color: #E6E6E6; margin-bottom: 0.5rem; font-size: 1rem; font-family: 'Playfair Display', serif; margin-top: 15px; }
+.process-number { position: absolute; top: -25px; left: 50%; transform: translateX(-50%); width: 50px; height: 50px; border-radius: 50%; background: #D4944A; color: #0D1117; font-size: 1.4rem; font-weight: 700; font-family: var(--heading-font); display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 20px rgba(212,148,74,0.4); z-index: 2; }
+.process-step h4 { color: #E6E6E6; margin-bottom: 0.5rem; font-size: 1rem; font-family: var(--heading-font); margin-top: 15px; }
 .process-step p { color: #8B949E; font-size: 0.85rem; line-height: 1.6; }
 
 /* TESTIMONIAL */
 #testimonials { background: #0A0E13; padding: 5rem 0; }
 .testimonial-block { text-align: center; max-width: 720px; margin: 0 auto; }
-.testimonial-quote { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-style: italic; color: #E6E6E6; margin-bottom: 1.5rem; line-height: 1.5; }
+.testimonial-quote { font-family: var(--heading-font); font-size: 1.5rem; font-style: italic; color: #E6E6E6; margin-bottom: 1.5rem; line-height: 1.5; }
 .testimonial-quote::before { content: '\201C'; display: block; font-size: 3rem; color: #D4944A; margin-bottom: -0.5rem; }
 .testimonial-author { color: #D4944A; font-weight: 600; }
 .testimonial-role { color: #8B949E; font-size: 0.85rem; }
@@ -117,7 +120,7 @@ section { padding: 6rem 0; }
 /* FAQ */
 .faq-list { max-width: 750px; margin: 0 auto; }
 .faq-item { border-bottom: 1px solid #21262D; }
-.faq-question { width: 100%; background: none; border: none; color: #E6E6E6; font-family: 'Inter', sans-serif; font-size: 1rem; font-weight: 500; padding: 1.25rem 0; text-align: left; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+.faq-question { width: 100%; background: none; border: none; color: #E6E6E6; font-family: var(--body-font); font-size: 1rem; font-weight: 500; padding: 1.25rem 0; text-align: left; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
 .faq-question::after { content: '+'; color: #D4944A; font-size: 1.25rem; font-weight: 300; }
 .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
 .faq-answer p { color: #8B949E; padding-bottom: 1.25rem; line-height: 1.6; font-size: 0.95rem; }
@@ -125,7 +128,7 @@ section { padding: 6rem 0; }
 /* INSTAGRAM */
 #instagram { background: #0D1117; padding: 5rem 0; }
 .instagram-header { text-align: center; margin-bottom: 3rem; }
-.instagram-header h2 { font-family: 'Playfair Display', serif; font-size: 2.2rem; color: #E6E6E6; margin-bottom: 0.5rem; }
+.instagram-header h2 { font-family: var(--heading-font); font-size: 2.2rem; color: #E6E6E6; margin-bottom: 0.5rem; }
 .instagram-header a { color: #D4944A; font-size: 1rem; text-decoration: underline; }
 .instagram-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 0.5rem; }
 .instagram-item { position: relative; aspect-ratio: 9/16; border-radius: 8px; overflow: hidden; cursor: pointer; background: #161B22; }
@@ -148,7 +151,7 @@ section { padding: 6rem 0; }
 .contact-form { background: #161B22; border: 1px solid #21262D; border-radius: 16px; padding: 2.25rem; }
 .form-group { margin-bottom: 1.1rem; }
 .form-group label { display: block; font-size: 0.8rem; color: #8B949E; margin-bottom: 0.4rem; }
-.form-group input, .form-group textarea, .form-group select { width: 100%; padding: 0.8rem 1rem; background: #0D1117; border: 1px solid #21262D; border-radius: 10px; color: #E6E6E6; font-family: 'Inter', sans-serif; font-size: 0.93rem; }
+.form-group input, .form-group textarea, .form-group select { width: 100%; padding: 0.8rem 1rem; background: #0D1117; border: 1px solid #21262D; border-radius: 10px; color: #E6E6E6; font-family: var(--body-font); font-size: 0.93rem; }
 .form-group input:focus, .form-group textarea:focus { outline: none; border-color: #D4944A; }
 .form-group textarea { resize: vertical; min-height: 110px; }
 .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
@@ -173,6 +176,19 @@ footer { background: #090C10; padding: 3rem 0 1.5rem; border-top: 1px solid #212
   .form-row { grid-template-columns: 1fr; }
   .instagram-grid { grid-template-columns: repeat(3, 1fr); gap: 0.75rem; }
 }
+
+/* FONT SWITCHER */
+.font-switcher { position: fixed; bottom: 20px; right: 20px; z-index: 9999; }
+.font-switcher-btn { background: #D4944A; color: #0D1117; border: none; padding: 0.75rem 1.25rem; border-radius: 50px; font-weight: 600; cursor: pointer; box-shadow: 0 4px 20px rgba(212,148,74,0.4); display: flex; align-items: center; gap: 0.5rem; transition: transform 0.2s; }
+.font-switcher-btn:hover { transform: translateY(-2px); }
+.font-switcher-panel { position: fixed; bottom: 80px; right: 20px; background: #0D1117; border: 1px solid #21262D; border-radius: 12px; padding: 1rem; z-index: 9998; opacity: 0; visibility: hidden; transform: translateY(10px); transition: all 0.3s; box-shadow: 0 8px 32px rgba(0,0,0,0.4); }
+.font-switcher-panel.active { opacity: 1; visibility: visible; transform: translateY(0); }
+.font-switcher-panel h4 { color: #E6E6E6; margin-bottom: 0.75rem; font-size: 0.9rem; }
+.font-option { display: block; width: 100%; padding: 0.6rem 1rem; background: #161B22; border: 1px solid #21262D; border-radius: 8px; color: #8B949E; font-size: 0.85rem; cursor: pointer; margin-bottom: 0.5rem; transition: all 0.2s; text-align: left; }
+.font-option:hover { background: #21262D; color: #E6E6E6; border-color: #D4944A; }
+.font-option.active { background: #D4944A; color: #0D1117; border-color: #D4944A; }
+.font-option .font-preview { font-size: 0.9rem; display: block; }
+.font-option .font-name { font-size: 0.75rem; color: #6B7280; margin-top: 0.25rem; display: block; }
 </style>
 </head>
 <body>
@@ -506,31 +522,75 @@ footer { background: #090C10; padding: 3rem 0 1.5rem; border-top: 1px solid #212
 </footer>
 
 <script>
-const slides = document.querySelectorAll('.hero-slide');
-const dots = document.querySelectorAll('.hero-dot');
-let current = 0;
-function goToSlide(index) {
-  slides.forEach(s => s.classList.remove('active'));
-  dots.forEach(d => d.classList.remove('active'));
-  slides[index].classList.add('active');
-  dots[index].classList.add('active');
-  current = index;
-}
-dots.forEach(dot => dot.addEventListener('click', () => goToSlide(parseInt(dot.dataset.index))));
-setInterval(() => goToSlide((current + 1) % slides.length), 4000);
-
+// FAQ Toggle
 document.querySelectorAll('.faq-question').forEach(btn => {
   btn.addEventListener('click', () => {
     const answer = btn.nextElementSibling;
     const isOpen = answer.style.maxHeight;
     document.querySelectorAll('.faq-answer').forEach(a => a.style.maxHeight = null);
-    document.querySelectorAll('.faq-question').forEach(q => q.style.fontWeight = '500');
+    document.querySelectorAll('.faq-question').forEach(b => b.style.fontWeight = '500');
     if (!isOpen) {
       answer.style.maxHeight = answer.scrollHeight + 'px';
-      btn.style.fontWeight = '600';
+      btn.style.fontWeight = '700';
     }
   });
 });
+
+// Font Switcher
+const fontCombinations = [
+  { name: 'Spectral + Public Sans', heading: 'Spectral', body: 'Public Sans' },
+  { name: 'Lora + Atkinson Hyperlegible', heading: 'Lora', body: 'Atkinson Hyperlegible Next' },
+  { name: 'Fraunces + Archivo', heading: 'Fraunces', body: 'Archivo' },
+  { name: 'Newsreader + Karla', heading: 'Newsreader', body: 'Karla' },
+  { name: 'Libre Caslon + IBM Plex', heading: 'Libre Caslon Text', body: 'IBM Plex Sans' },
+  { name: 'Domine + Schibsted Grotesk', heading: 'Domine', body: 'Schibsted Grotesk' },
+  { name: 'Bitter + Nunito Sans', heading: 'Bitter', body: 'Nunito Sans' },
+  { name: 'Crimson Pro + Public Sans', heading: 'Crimson Pro', body: 'Public Sans' },
+  { name: 'Zilla Slab + Karla', heading: 'Zilla Slab', body: 'Karla' },
+  { name: 'Georgia + Atkinson Hyperlegible', heading: 'Georgia', body: 'Atkinson Hyperlegible Next' }
+];
+
+let currentFont = 0;
+const fontSwitcherBtn = document.createElement('button');
+fontSwitcherBtn.className = 'font-switcher-btn';
+fontSwitcherBtn.innerHTML = '<span>Aa</span> Change Font';
+document.body.appendChild(fontSwitcherBtn);
+
+const fontPanel = document.createElement('div');
+fontPanel.className = 'font-switcher-panel';
+fontPanel.innerHTML = '<h4>Select Font Pairing</h4>' + fontCombinations.map((font, i) => 
+  `<button class="font-option ${i === 0 ? 'active' : ''}" data-index="${i}">
+    <span class="font-preview">${font.heading} + ${font.body}</span>
+    <span class="font-name">${font.name}</span>
+  </button>`
+).join('') + '<button class="font-apply-btn" style="width:100%;margin-top:0.5rem;padding:0.6rem;background:#D4944A;border:none;border-radius:8px;color:#0D1117;font-weight:600;cursor:pointer;">Apply Selected</button>';
+document.body.appendChild(fontPanel);
+
+let selectedFont = 0;
+fontSwitcherBtn.addEventListener('click', () => fontPanel.classList.toggle('active'));
+fontPanel.querySelectorAll('.font-option').forEach(opt => {
+  opt.addEventListener('click', () => {
+    fontPanel.querySelectorAll('.font-option').forEach(o => o.classList.remove('active'));
+    opt.classList.add('active');
+    selectedFont = parseInt(opt.dataset.index);
+  });
+});
+fontPanel.querySelector('.font-apply-btn').addEventListener('click', () => {
+  const font = fontCombinations[selectedFont];
+  document.documentElement.style.setProperty('--heading-font', font.heading);
+  document.documentElement.style.setProperty('--body-font', font.body);
+  fontPanel.classList.remove('active');
+  localStorage.setItem('selectedFont', selectedFont);
+});
+
+const savedFont = localStorage.getItem('selectedFont');
+if (savedFont) {
+  const font = fontCombinations[savedFont];
+  document.documentElement.style.setProperty('--heading-font', font.heading);
+  document.documentElement.style.setProperty('--body-font', font.body);
+  fontPanel.querySelectorAll('.font-option')[savedFont].classList.add('active');
+  fontPanel.querySelectorAll('.font-option')[savedFont].classList.remove('active');
+}
 </script>
 </body>
 </html>
