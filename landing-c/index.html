@@ -101,14 +101,15 @@ section { padding: 5.5rem 0; }
 .mat-item { color: #C8B8A0; font-size: 0.9rem; padding: 0.4rem 0; border-bottom: 1px solid rgba(200,184,160,0.12); }
 
 /* PROCESS */
-.process-wrapper { position: relative; max-width: 900px; margin: 0 auto; }
-.process-line { position: absolute; top: 40px; left: 60px; right: 60px; height: 2px; background: #D4C5B0; z-index: 0; }
+.process-wrapper { position: relative; max-width: 950px; margin: 0 auto; padding-top: 40px; }
+.process-line { position: absolute; top: 60px; left: 80px; right: 80px; height: 2px; background: #D4C5B0; z-index: 0; }
 .process-steps { display: flex; justify-content: space-between; position: relative; z-index: 1; }
-.process-step { text-align: center; width: 180px; }
-.process-box { width: 80px; height: 80px; border-radius: 18px; background: #FFF; border: 2px solid #E8D5C0; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; font-size: 1.3rem; font-weight: 700; color: #B5541C; font-family: 'Lexend', sans-serif; transition: border-color 0.3s; }
-.process-step:hover .process-box { border-color: #B5541C; }
-.process-step h4 { color: #2C2416; margin-bottom: 0.5rem; font-size: 0.95rem; }
-.process-step p { color: #7A7265; font-size: 0.85rem; line-height: 1.5; }
+.process-step { position: relative; width: 200px; text-align: center; }
+.process-card { background: #FFF; border: 2px solid #E8D5C0; border-radius: 16px; padding: 45px 1.5rem 1.5rem; margin-top: 30px; transition: border-color 0.3s, box-shadow 0.3s; }
+.process-step:hover .process-card { border-color: #B5541C; box-shadow: 0 8px 32px rgba(181,84,28,0.15); }
+.process-number { position: absolute; top: -25px; left: 50%; transform: translateX(-50%); width: 55px; height: 55px; border-radius: 50%; background: #B5541C; color: #FFF; font-size: 1.5rem; font-weight: 700; font-family: 'Lexend', sans-serif; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 20px rgba(181,84,28,0.4); }
+.process-step h4 { color: #2C2416; margin-bottom: 0.5rem; font-size: 1rem; font-family: 'Lexend', sans-serif; font-weight: 600; }
+.process-step p { color: #7A7265; font-size: 0.85rem; line-height: 1.6; }
 
 /* TESTIMONIALS */
 .testimonial-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
@@ -305,24 +306,32 @@ footer { background: #151010; padding: 3rem 0 1.5rem; color: #A89880; }
       <div class="process-line"></div>
       <div class="process-steps">
         <div class="process-step">
-          <div class="process-box">1</div>
-          <h4>Lorem Ipsum Dolor</h4>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod.</p>
+          <div class="process-card">
+            <div class="process-number">1</div>
+            <h4>Lorem Ipsum Dolor</h4>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore.</p>
+          </div>
         </div>
         <div class="process-step">
-          <div class="process-box">2</div>
-          <h4>Consectetur Adipiscing</h4>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod.</p>
+          <div class="process-card">
+            <div class="process-number">2</div>
+            <h4>Consectetur Adipiscing</h4>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore.</p>
+          </div>
         </div>
         <div class="process-step">
-          <div class="process-box">3</div>
-          <h4>Eiusmod Tempor</h4>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod.</p>
+          <div class="process-card">
+            <div class="process-number">3</div>
+            <h4>Eiusmod Tempor</h4>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore.</p>
+          </div>
         </div>
         <div class="process-step">
-          <div class="process-box">4</div>
-          <h4>Incididunt Ut Labore</h4>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod.</p>
+          <div class="process-card">
+            <div class="process-number">4</div>
+            <h4>Incididunt Ut Labore</h4>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore.</p>
+          </div>
         </div>
       </div>
     </div>
