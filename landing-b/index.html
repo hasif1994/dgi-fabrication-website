@@ -551,21 +551,22 @@ footer { background: #18181B; padding: 3rem 0 1.5rem; }
 </footer>
 
 <script>
-document.querySelectorAll('.faq-question').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const answer = btn.nextElementSibling;
-    const isOpen = answer.style.maxHeight;
-    document.querySelectorAll('.faq-answer').forEach(a => a.style.maxHeight = null);
-    document.querySelectorAll('.faq-question').forEach(q => q.style.fontWeight = '600');
-    if (!isOpen) {
-      answer.style.maxHeight = answer.scrollHeight + 'px';
-      btn.style.fontWeight = '700';
-    }
+// FAQ Toggle
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('.faq-question').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const answer = btn.nextElementSibling;
+      const isOpen = answer.style.maxHeight;
+      document.querySelectorAll('.faq-answer').forEach(a => a.style.maxHeight = null);
+      document.querySelectorAll('.faq-question').forEach(b => b.style.fontWeight = '500');
+      if (!isOpen) {
+        answer.style.maxHeight = answer.scrollHeight + 'px';
+        btn.style.fontWeight = '700';
+      }
+    });
   });
-});
 
-// Font Switcher
-(function() {
+  // Font Switcher
   const fontCombinations = [
     { name: 'Spectral + Public Sans', heading: 'Spectral', body: 'Public Sans' },
     { name: 'Lora + Atkinson Hyperlegible', heading: 'Lora', body: 'Atkinson Hyperlegible Next' },
@@ -599,7 +600,6 @@ document.querySelectorAll('.faq-question').forEach(btn => {
   // Create panel
   const panel = document.createElement('div');
   panel.className = 'font-switcher-panel';
-  panel.style.position = 'relative';
   const optionsHTML = fontCombinations.map((font, i) => 
     `<button class="font-option ${i === selectedFont ? 'active' : ''}" data-index="${i}">
       <span class="font-preview">${font.heading} + ${font.body}</span>
@@ -610,28 +610,28 @@ document.querySelectorAll('.faq-question').forEach(btn => {
   document.body.appendChild(panel);
 
   // Toggle panel
-  btn.addEventListener('click', (e) => {
+  btn.addEventListener('click', function(e) {
     e.stopPropagation();
     panel.classList.toggle('active');
   });
 
   // Close button
-  panel.querySelector('.font-close').addEventListener('click', (e) => {
+  panel.querySelector('.font-close').addEventListener('click', function(e) {
     e.stopPropagation();
     panel.classList.remove('active');
   });
 
   // Select option
-  panel.querySelectorAll('.font-option').forEach(opt => {
+  panel.querySelectorAll('.font-option').forEach(function(opt) {
     opt.addEventListener('click', function() {
-      panel.querySelectorAll('.font-option').forEach(o => o.classList.remove('active'));
+      panel.querySelectorAll('.font-option').forEach(function(o) { o.classList.remove('active'); });
       this.classList.add('active');
       selectedFont = parseInt(this.dataset.index);
     });
   });
 
   // Apply button
-  panel.querySelector('.font-apply-btn').addEventListener('click', () => {
+  panel.querySelector('.font-apply-btn').addEventListener('click', function() {
     const font = fontCombinations[selectedFont];
     document.documentElement.style.setProperty('--heading-font', font.heading + ', sans-serif');
     document.documentElement.style.setProperty('--body-font', font.body + ', sans-serif');
@@ -640,12 +640,12 @@ document.querySelectorAll('.faq-question').forEach(btn => {
   });
 
   // Close when clicking outside
-  document.addEventListener('click', (e) => {
+  document.addEventListener('click', function(e) {
     if (!panel.contains(e.target) && !btn.contains(e.target)) {
       panel.classList.remove('active');
     }
   });
-})();
+});
 </script>
 </body>
 </html>
