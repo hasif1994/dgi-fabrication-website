@@ -38,6 +38,7 @@ nav .container { display: flex; align-items: center; justify-content: space-betw
 .btn { display: inline-block; padding: 0.8rem 2rem; border-radius: 50px; font-family: 'Montserrat', sans-serif; font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: all 0.25s; border: none; letter-spacing: 0.01em; }
 .btn-primary { background: #2563EB; color: #FFF; }
 .btn-primary:hover { background: #1D4ED8; color: #FFF; }
+.btn-full { display: block; width: 100%; padding: 1rem 2rem; min-height: 50px; box-sizing: border-box; }
 .btn-outline { border: 2px solid #2563EB; color: #2563EB; background: transparent; border-radius: 50px; }
 .btn-outline:hover { background: #2563EB; color: #FFF; }
 
@@ -389,17 +390,18 @@ footer { background: #18181B; padding: 3rem 0 1.5rem; }
       <form class="contact-form">
         <div class="form-row">
           <div class="form-group"><label>Lorem Ipsum</label><input type="text" placeholder="Lorem ipsum"></div>
-          <div class="form-row">
-            <div class="form-group"><label>Sit Amet</label><input type="email" placeholder="lorem@ipsum.com"></div>
-            <div class="form-group"><label>Consectetur</label><input type="tel" placeholder="(555) 000-0000"></div>
-          </div>
-        <div class="form-row">
-          <div class="form-group"><label>Email</label><input type="email" placeholder="lorem@ipsum.com"></div>
-          <div class="form-group"><label>Phone</label><input type="tel" placeholder="(555) 000-0000"></div>
+          <div class="form-group"><label>Sit Amet</label><input type="email" placeholder="lorem@ipsum.com"></div>
         </div>
-        <div class="form-group"><label>Project Type</label><select><option>Consectetur adipiscing...</option><option>Lorem ipsum dolor</option><option>Sit amet consectetur</option><option>Adipiscing elit</option></select></div>
+        <div class="form-row">
+          <div class="form-group"><label>Consectetur</label><input type="tel" placeholder="(555) 000-0000"></div>
+          <div class="form-group"><label>Email</label><input type="email" placeholder="lorem@ipsum.com"></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label>Phone</label><input type="tel" placeholder="(555) 000-0000"></div>
+          <div class="form-group"><label>Project Type</label><select><option>Consectetur adipiscing...</option><option>Lorem ipsum dolor</option><option>Sit amet consectetur</option><option>Adipiscing elit</option></select></div>
+        </div>
         <div class="form-group"><label>Message</label><textarea placeholder="Lorem ipsum dolor sit amet..."></textarea></div>
-        <button type="submit" class="btn btn-primary" style="width:100%;padding:1rem 2rem;min-height:50px;">Send Message</button>
+        <button type="submit" class="btn btn-primary btn-full">Send Message</button>
       </form>
     </div>
   </div>
