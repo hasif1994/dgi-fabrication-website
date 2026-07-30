@@ -28,8 +28,8 @@ a:hover { color: #8B3A0F; }
 .dark-band { background: #1E1810; color: #F0E6D8; }
 
 /* NAV */
-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(250,247,242,0.94); backdrop-filter: blur(10px); border-bottom: 1px solid #E8E0D5; padding: 0.85rem 0; }
-nav .container { display: flex; align-items: center; justify-content: center; gap: 3rem; }
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(250,247,242,0.94); backdrop-filter: blur(10px); border-bottom: 1px solid #E8E0D5; padding: 0.85rem 0; width: 100%; }
+nav .container { display: flex; align-items: center; justify-content: center; gap: 3rem; width: 100%; max-width: 1400px; }
 .nav-logo { height: 56px; }
 .nav-links { display: flex; gap: 2rem; align-items: center; }
 .nav-links a { color: #7A7265; font-size: 0.88rem; font-weight: 500; }
@@ -133,12 +133,16 @@ section { padding: 5.5rem 0; }
 .instagram-header h2 { font-family: 'Lexend', sans-serif; font-size: 2.2rem; color: #2C2416; margin-bottom: 0.5rem; }
 .instagram-header a { color: #B5541C; font-size: 1rem; text-decoration: underline; }
 .instagram-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 0.5rem; }
-.instagram-item { position: relative; aspect-ratio: 1; border-radius: 8px; overflow: hidden; cursor: pointer; }
+.instagram-item { position: relative; aspect-ratio: 9/16; border-radius: 8px; overflow: hidden; cursor: pointer; background: #F0E6D8; }
 .instagram-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s; }
 .instagram-item:hover img { transform: scale(1.08); }
-.instagram-overlay { position: absolute; inset: 0; background: rgba(181,84,28,0.85); display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s; }
+.instagram-overlay { position: absolute; inset: 0; background: linear-gradient(180deg, transparent 0%, rgba(181,84,28,0.9) 100%); display: flex; flex-direction: column; align-items: center; justify-content: flex-end; padding: 1rem; opacity: 0; transition: opacity 0.3s; }
 .instagram-item:hover .instagram-overlay { opacity: 1; }
-.instagram-overlay span { color: #FFF; font-size: 1.2rem; font-weight: 700; }
+.instagram-overlay span { color: #FFF; font-size: 1.5rem; }
+.instagram-overlay p { color: #FFF; font-size: 0.8rem; margin-top: 0.5rem; }
+.instagram-cta { text-align: center; margin-top: 2rem; }
+.instagram-cta a { display: inline-block; background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); color: #FFF; padding: 0.75rem 2rem; border-radius: 50px; text-decoration: none; font-weight: 600; transition: transform 0.2s; }
+.instagram-cta a:hover { transform: translateY(-2px); }
 
 /* CONTACT */
 .contact-wrap { text-align: center; max-width: 600px; margin: 0 auto 3rem; }
@@ -411,33 +415,54 @@ footer { background: #151010; padding: 3rem 0 1.5rem; color: #A89880; }
   <div class="container">
     <div class="section-header">
       <h2>Follow Us on Instagram</h2>
-      <a href="https://www.instagram.com/sean._.hagen?igsh=d3lpZzA5M251eGlt" target="_blank" rel="noopener">@sean._.hagen</a>
+      <a href="https://www.instagram.com/sean._.hagen/reels/" target="_blank" rel="noopener">View Our Reels</a>
     </div>
     <div class="instagram-grid">
-      <div class="instagram-item">
-        <img src="../Assets/images/1.png" alt="Instagram">
-        <div class="instagram-overlay"><span>⟳</span></div>
-      </div>
-      <div class="instagram-item">
-        <img src="../Assets/images/2.png" alt="Instagram">
-        <div class="instagram-overlay"><span>⟳</span></div>
-      </div>
-      <div class="instagram-item">
-        <img src="../Assets/images/3.png" alt="Instagram">
-        <div class="instagram-overlay"><span>⟳</span></div>
-      </div>
-      <div class="instagram-item">
-        <img src="../Assets/images/4.png" alt="Instagram">
-        <div class="instagram-overlay"><span>⟳</span></div>
-      </div>
-      <div class="instagram-item">
-        <img src="../Assets/images/5.png" alt="Instagram">
-        <div class="instagram-overlay"><span>⟳</span></div>
-      </div>
-      <div class="instagram-item">
-        <img src="../Assets/images/6.png" alt="Instagram">
-        <div class="instagram-overlay"><span>⟳</span></div>
-      </div>
+      <a href="https://www.instagram.com/sean._.hagen/reels/" target="_blank" rel="noopener" class="instagram-item">
+        <img src="../Assets/images/1.png" alt="Instagram Reel">
+        <div class="instagram-overlay">
+          <span>▶</span>
+          <p>Watch Reel</p>
+        </div>
+      </a>
+      <a href="https://www.instagram.com/sean._.hagen/reels/" target="_blank" rel="noopener" class="instagram-item">
+        <img src="../Assets/images/2.png" alt="Instagram Reel">
+        <div class="instagram-overlay">
+          <span>▶</span>
+          <p>Watch Reel</p>
+        </div>
+      </a>
+      <a href="https://www.instagram.com/sean._.hagen/reels/" target="_blank" rel="noopener" class="instagram-item">
+        <img src="../Assets/images/3.png" alt="Instagram Reel">
+        <div class="instagram-overlay">
+          <span>▶</span>
+          <p>Watch Reel</p>
+        </div>
+      </a>
+      <a href="https://www.instagram.com/sean._.hagen/reels/" target="_blank" rel="noopener" class="instagram-item">
+        <img src="../Assets/images/4.png" alt="Instagram Reel">
+        <div class="instagram-overlay">
+          <span>▶</span>
+          <p>Watch Reel</p>
+        </div>
+      </a>
+      <a href="https://www.instagram.com/sean._.hagen/reels/" target="_blank" rel="noopener" class="instagram-item">
+        <img src="../Assets/images/5.png" alt="Instagram Reel">
+        <div class="instagram-overlay">
+          <span>▶</span>
+          <p>Watch Reel</p>
+        </div>
+      </a>
+      <a href="https://www.instagram.com/sean._.hagen/reels/" target="_blank" rel="noopener" class="instagram-item">
+        <img src="../Assets/images/6.png" alt="Instagram Reel">
+        <div class="instagram-overlay">
+          <span>▶</span>
+          <p>Watch Reel</p>
+        </div>
+      </a>
+    </div>
+    <div class="instagram-cta">
+      <a href="https://www.instagram.com/sean._.hagen/" target="_blank" rel="noopener">Follow @sean._.hagen on Instagram</a>
     </div>
   </div>
 </section>
