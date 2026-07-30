@@ -190,17 +190,20 @@ footer { background: #18181B; padding: 3rem 0 1.5rem; }
 }
 
 /* FONT SWITCHER */
-.font-switcher { position: fixed; bottom: 20px; right: 20px; z-index: 9999; }
-.font-switcher-btn { background: #2563EB; color: #FFF; border: none; padding: 0.75rem 1.25rem; border-radius: 50px; font-weight: 600; cursor: pointer; box-shadow: 0 4px 20px rgba(37,99,235,0.4); display: flex; align-items: center; gap: 0.5rem; transition: transform 0.2s; }
-.font-switcher-btn:hover { transform: translateY(-2px); }
-.font-switcher-panel { position: fixed; bottom: 80px; right: 20px; background: #FFF; border: 1px solid #E4E4E7; border-radius: 12px; padding: 1rem; z-index: 9998; opacity: 0; visibility: hidden; transform: translateY(10px); transition: all 0.3s; box-shadow: 0 8px 32px rgba(0,0,0,0.1); }
-.font-switcher-panel.active { opacity: 1; visibility: visible; transform: translateY(0); }
-.font-switcher-panel h4 { color: #18181B; margin-bottom: 0.75rem; font-size: 0.9rem; }
-.font-option { display: block; width: 100%; padding: 0.6rem 1rem; background: #F4F4F5; border: 1px solid #E4E4E7; border-radius: 8px; color: #71717A; font-size: 0.85rem; cursor: pointer; margin-bottom: 0.5rem; transition: all 0.2s; text-align: left; }
-.font-option:hover { background: #E4E4E7; color: #18181B; border-color: #2563EB; }
-.font-option.active { background: #2563EB; color: #FFF; border-color: #2563EB; }
-.font-option .font-preview { font-size: 0.9rem; display: block; }
+.font-switcher-btn { position: fixed; bottom: 25px; right: 25px; z-index: 9999; background: linear-gradient(135deg, #2563EB 0%, #3B82F6 100%); color: #FFF; border: 2px solid #18181B; padding: 0.9rem 1.4rem; border-radius: 50px; font-weight: 700; font-size: 0.9rem; cursor: pointer; box-shadow: 0 6px 24px rgba(37,99,235,0.5); display: flex; align-items: center; gap: 0.5rem; transition: all 0.3s; }
+.font-switcher-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 32px rgba(37,99,235,0.6); }
+.font-switcher-panel { position: fixed; bottom: 90px; right: 25px; background: #FFF; border: 2px solid #E4E4E7; border-radius: 16px; padding: 1.25rem; z-index: 9998; opacity: 0; visibility: hidden; transform: translateY(20px) scale(0.95); transition: all 0.3s; box-shadow: 0 12px 48px rgba(0,0,0,0.15); max-height: 400px; overflow-y: auto; min-width: 280px; }
+.font-switcher-panel.active { opacity: 1; visibility: visible; transform: translateY(0) scale(1); }
+.font-switcher-panel h4 { color: #18181B; margin-bottom: 1rem; font-size: 0.95rem; font-weight: 600; position: sticky; top: 0; background: #FFF; padding-bottom: 0.75rem; border-bottom: 2px solid #E4E4E7; }
+.font-option { display: block; width: 100%; padding: 0.75rem 1rem; background: #F4F4F5; border: 1px solid #E4E4E7; border-radius: 10px; color: #71717A; font-size: 0.85rem; cursor: pointer; margin-bottom: 0.5rem; transition: all 0.2s; text-align: left; }
+.font-option:hover { background: #E4E4E7; color: #18181B; border-color: #2563EB; transform: translateX(4px); }
+.font-option.active { background: linear-gradient(135deg, #2563EB 0%, #3B82F6 100%); color: #FFF; border-color: #2563EB; }
+.font-option .font-preview { font-size: 0.9rem; display: block; font-weight: 500; }
 .font-option .font-name { font-size: 0.75rem; color: #A1A1AA; margin-top: 0.25rem; display: block; }
+.font-apply-btn { width: 100%; margin-top: 0.75rem; padding: 0.75rem; background: linear-gradient(135deg, #2563EB 0%, #3B82F6 100%); border: 2px solid #18181B; border-radius: 10px; color: #FFF; font-weight: 700; cursor: pointer; transition: all 0.2s; }
+.font-apply-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(37,99,235,0.4); }
+.font-close { position: absolute; top: 10px; right: 12px; background: #E4E4E7; border: none; width: 28px; height: 28px; border-radius: 50%; color: #71717A; cursor: pointer; font-size: 1rem; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
+.font-close:hover { background: #2563EB; color: #FFF; }
 </style>
 </head>
 <body>
@@ -562,58 +565,87 @@ document.querySelectorAll('.faq-question').forEach(btn => {
 });
 
 // Font Switcher
-const fontCombinations = [
-  { name: 'Spectral + Public Sans', heading: 'Spectral', body: 'Public Sans' },
-  { name: 'Lora + Atkinson Hyperlegible', heading: 'Lora', body: 'Atkinson Hyperlegible Next' },
-  { name: 'Fraunces + Archivo', heading: 'Fraunces', body: 'Archivo' },
-  { name: 'Newsreader + Karla', heading: 'Newsreader', body: 'Karla' },
-  { name: 'Libre Caslon + IBM Plex', heading: 'Libre Caslon Text', body: 'IBM Plex Sans' },
-  { name: 'Domine + Schibsted Grotesk', heading: 'Domine', body: 'Schibsted Grotesk' },
-  { name: 'Bitter + Nunito Sans', heading: 'Bitter', body: 'Nunito Sans' },
-  { name: 'Crimson Pro + Public Sans', heading: 'Crimson Pro', body: 'Public Sans' },
-  { name: 'Zilla Slab + Karla', heading: 'Zilla Slab', body: 'Karla' },
-  { name: 'Georgia + Atkinson Hyperlegible', heading: 'Georgia', body: 'Atkinson Hyperlegible Next' }
-];
+(function() {
+  const fontCombinations = [
+    { name: 'Spectral + Public Sans', heading: 'Spectral', body: 'Public Sans' },
+    { name: 'Lora + Atkinson Hyperlegible', heading: 'Lora', body: 'Atkinson Hyperlegible Next' },
+    { name: 'Fraunces + Archivo', heading: 'Fraunces', body: 'Archivo' },
+    { name: 'Newsreader + Karla', heading: 'Newsreader', body: 'Karla' },
+    { name: 'Libre Caslon + IBM Plex', heading: 'Libre Caslon Text', body: 'IBM Plex Sans' },
+    { name: 'Domine + Schibsted Grotesk', heading: 'Domine', body: 'Schibsted Grotesk' },
+    { name: 'Bitter + Nunito Sans', heading: 'Bitter', body: 'Nunito Sans' },
+    { name: 'Crimson Pro + Public Sans', heading: 'Crimson Pro', body: 'Public Sans' },
+    { name: 'Zilla Slab + Karla', heading: 'Zilla Slab', body: 'Karla' },
+    { name: 'Georgia + Atkinson Hyperlegible', heading: 'Georgia', body: 'Atkinson Hyperlegible Next' }
+  ];
 
-let currentFont = 0;
-const fontSwitcherBtn = document.createElement('button');
-fontSwitcherBtn.className = 'font-switcher-btn';
-fontSwitcherBtn.innerHTML = '<span>Aa</span> Change Font';
-document.body.appendChild(fontSwitcherBtn);
+  let selectedFont = 0;
+  let savedFont = localStorage.getItem('selectedFont');
+  if (savedFont !== null) selectedFont = parseInt(savedFont);
 
-const fontPanel = document.createElement('div');
-fontPanel.className = 'font-switcher-panel';
-fontPanel.innerHTML = '<h4>Select Font Pairing</h4>' + fontCombinations.map((font, i) => 
-  `<button class="font-option ${i === 0 ? 'active' : ''}" data-index="${i}">
-    <span class="font-preview">${font.heading} + ${font.body}</span>
-    <span class="font-name">${font.name}</span>
-  </button>`
-).join('') + '<button class="font-apply-btn" style="width:100%;margin-top:0.5rem;padding:0.6rem;background:#2563EB;border:none;border-radius:8px;color:#FFF;font-weight:600;cursor:pointer;">Apply Selected</button>';
-document.body.appendChild(fontPanel);
+  // Apply saved font on load
+  if (savedFont !== null) {
+    const font = fontCombinations[selectedFont];
+    document.documentElement.style.setProperty('--heading-font', font.heading + ', sans-serif');
+    document.documentElement.style.setProperty('--body-font', font.body + ', sans-serif');
+  }
 
-let selectedFont = 0;
-fontSwitcherBtn.addEventListener('click', () => fontPanel.classList.toggle('active'));
-fontPanel.querySelectorAll('.font-option').forEach(opt => {
-  opt.addEventListener('click', () => {
-    fontPanel.querySelectorAll('.font-option').forEach(o => o.classList.remove('active'));
-    opt.classList.add('active');
-    selectedFont = parseInt(opt.dataset.index);
+  // Create button
+  const btn = document.createElement('button');
+  btn.className = 'font-switcher-btn';
+  btn.innerHTML = '<span style="font-weight:900;">Aa</span> Change Font';
+  document.body.appendChild(btn);
+
+  // Create panel
+  const panel = document.createElement('div');
+  panel.className = 'font-switcher-panel';
+  panel.style.position = 'relative';
+  const optionsHTML = fontCombinations.map((font, i) => 
+    `<button class="font-option ${i === selectedFont ? 'active' : ''}" data-index="${i}">
+      <span class="font-preview">${font.heading} + ${font.body}</span>
+      <span class="font-name">${font.name}</span>
+    </button>`
+  ).join('');
+  panel.innerHTML = '<h4 style="position:relative;">Select Font Pairing<button class="font-close" type="button">×</button></h4>' + optionsHTML + '<button class="font-apply-btn" type="button">Apply Selected</button>';
+  document.body.appendChild(panel);
+
+  // Toggle panel
+  btn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    panel.classList.toggle('active');
   });
-});
-fontPanel.querySelector('.font-apply-btn').addEventListener('click', () => {
-  const font = fontCombinations[selectedFont];
-  document.documentElement.style.setProperty('--heading-font', font.heading);
-  document.documentElement.style.setProperty('--body-font', font.body);
-  fontPanel.classList.remove('active');
-  localStorage.setItem('selectedFont', selectedFont);
-});
 
-const savedFont = localStorage.getItem('selectedFont');
-if (savedFont) {
-  const font = fontCombinations[savedFont];
-  document.documentElement.style.setProperty('--heading-font', font.heading);
-  document.documentElement.style.setProperty('--body-font', font.body);
-}
+  // Close button
+  panel.querySelector('.font-close').addEventListener('click', (e) => {
+    e.stopPropagation();
+    panel.classList.remove('active');
+  });
+
+  // Select option
+  panel.querySelectorAll('.font-option').forEach(opt => {
+    opt.addEventListener('click', function() {
+      panel.querySelectorAll('.font-option').forEach(o => o.classList.remove('active'));
+      this.classList.add('active');
+      selectedFont = parseInt(this.dataset.index);
+    });
+  });
+
+  // Apply button
+  panel.querySelector('.font-apply-btn').addEventListener('click', () => {
+    const font = fontCombinations[selectedFont];
+    document.documentElement.style.setProperty('--heading-font', font.heading + ', sans-serif');
+    document.documentElement.style.setProperty('--body-font', font.body + ', sans-serif');
+    localStorage.setItem('selectedFont', selectedFont);
+    panel.classList.remove('active');
+  });
+
+  // Close when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!panel.contains(e.target) && !btn.contains(e.target)) {
+      panel.classList.remove('active');
+    }
+  });
+})();
 </script>
 </body>
 </html>
