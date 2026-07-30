@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DGI — Custom Exhibit Fabrication</title>
+<title>Lorem Ipsum Dolor — Sit Amet Consectetur</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
@@ -60,13 +60,17 @@ section { padding: 5.5rem 0; }
 .client-logos span { font-size: 0.95rem; color: #A1A1AA; font-weight: 700; letter-spacing: 0.04em; font-family: 'Montserrat', sans-serif; }
 
 /* SERVICES */
-.services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3rem; text-align: center; }
-.service-card { transition: transform 0.3s; }
-.service-card:hover { transform: translateY(-4px); }
-.service-circle { width: 200px; height: 200px; border-radius: 50%; margin: 0 auto 1.5rem; background-size: cover; background-position: center; border: 3px solid #E4E4E7; transition: border-color 0.3s, box-shadow 0.3s; }
-.service-card:hover .service-circle { border-color: #2563EB; box-shadow: 0 0 0 8px rgba(37,99,235,0.08); }
-.service-card h3 { margin-bottom: 0.6rem; font-size: 1.2rem; }
-.service-card p { color: #71717A; font-size: 0.93rem; line-height: 1.6; max-width: 280px; margin: 0 auto; }
+.services-list { display: flex; flex-direction: column; gap: 2rem; max-width: 900px; margin: 0 auto; }
+.service-row { display: grid; grid-template-columns: 1fr 1.2fr; gap: 0; border: 1px solid #E4E4E7; border-radius: 16px; overflow: hidden; background: #FFF; transition: box-shadow 0.3s, transform 0.2s; }
+.service-row:hover { box-shadow: 0 8px 40px rgba(37,99,235,0.08); transform: translateY(-2px); }
+.service-row-img { background-size: cover; background-position: center; min-height: 140px; }
+.service-row-content { padding: 2rem 2rem 2rem 2.5rem; display: flex; flex-direction: column; justify-content: center; }
+.service-row-num { font-family: 'Montserrat', sans-serif; font-size: 3rem; color: #EFF6FF; font-weight: 700; line-height: 1; margin-bottom: -0.75rem; }
+.service-row h3 { font-size: 1.3rem; margin-bottom: 0.35rem; position: relative; z-index: 1; }
+.service-row p { color: #71717A; font-size: 0.95rem; line-height: 1.6; }
+.service-row:nth-child(1) .service-row-num { color: #DBEAFE; }
+.service-row:nth-child(2) .service-row-num { color: #D1FAE5; }
+.service-row:nth-child(3) .service-row-num { color: #FEE2E2; }
 
 /* ABOUT */
 .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
@@ -146,12 +150,12 @@ footer { background: #18181B; padding: 3rem 0 1.5rem; }
 
 @media (max-width: 768px) {
   .nav-links { display: none; }
-  #hero { grid-template-columns: 1fr; }
-  .hero-text { padding: 2rem 0; order: 1; }
-  .hero-image { min-height: 300px; border-radius: 0; order: 0; }
-  .services-grid, .caps-grid { grid-template-columns: 1fr; }
+  .services-list { gap: 1.25rem; }
+  .service-row { grid-template-columns: 1fr; }
+  .service-row-img { min-height: 180px; }
+  .service-row-content { padding: 1.75rem; }
   .about-grid, .contact-grid, .footer-grid { grid-template-columns: 1fr; }
-  .stats-row, .portfolio-grid { grid-template-columns: repeat(2, 1fr); }
+  .stats-row, .portfolio-grid, .caps-grid { grid-template-columns: repeat(2, 1fr); }
   .process-steps { flex-direction: column; align-items: center; gap: 2rem; }
   .process-line { display: none; }
   .form-row { grid-template-columns: 1fr; }
@@ -162,14 +166,14 @@ footer { background: #18181B; padding: 3rem 0 1.5rem; }
 
 <nav>
   <div class="container">
-    <a href="#"><img src="../Assets/logos/DGI-LOGO%20(Black).png" alt="DGI" class="nav-logo"></a>
+    <a href="#"><img src="../Assets/logos/DGI-LOGO%20(Black).png" alt="Lorem Ipsum" class="nav-logo"></a>
     <div class="nav-links">
       <a href="#services">Services</a>
       <a href="#portfolio">Work</a>
       <a href="#about">About</a>
       <a href="#faq">FAQ</a>
-      <a href="#contact">Contact</a>
-      <a href="#contact" class="btn btn-primary">Get a Quote</a>
+      <a href="#contact">Lorem Ipsum</a>
+      <a href="#contact" class="btn btn-primary">Lorem Ipsum Dolor</a>
     </div>
   </div>
 </nav>
@@ -180,7 +184,7 @@ footer { background: #18181B; padding: 3rem 0 1.5rem; }
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
     <div class="hero-btns">
       <a href="#contact" class="btn btn-primary">Request for Quotation</a>
-      <a href="#portfolio" class="btn btn-outline">See Our Work</a>
+      <a href="#portfolio" class="btn btn-outline">Lorem Ipsum Dolor</a>
     </div>
   </div>
   <div class="hero-image" style="background-image:url('../Assets/images/1.png');"></div>
@@ -207,21 +211,30 @@ footer { background: #18181B; padding: 3rem 0 1.5rem; }
       <h2>Lorem ipsum dolor sit amet.</h2>
       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
     </div>
-    <div class="services-grid">
-      <div class="service-card">
-        <div class="service-circle" style="background-image:url('../Assets/images/8.png');"></div>
-        <h3>Exhibit Fabrication</h3>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna.</p>
+    <div class="services-list">
+      <div class="service-row">
+        <div class="service-row-img" style="background-image:url('../Assets/images/8.png');"></div>
+        <div class="service-row-content">
+          <div class="service-row-num">01</div>
+          <h3>Lorem Ipsum Dolor</h3>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
+        </div>
       </div>
-      <div class="service-card">
-        <div class="service-circle" style="background-image:url('../Assets/images/9.png');"></div>
-        <h3>Custom Millwork</h3>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna.</p>
+      <div class="service-row">
+        <div class="service-row-img" style="background-image:url('../Assets/images/9.png');"></div>
+        <div class="service-row-content">
+          <div class="service-row-num">02</div>
+          <h3>Sit Amet Consectetur</h3>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
+        </div>
       </div>
-      <div class="service-card">
-        <div class="service-circle" style="background-image:url('../Assets/images/10.png');"></div>
-        <h3>On-Site Installation</h3>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna.</p>
+      <div class="service-row">
+        <div class="service-row-img" style="background-image:url('../Assets/images/10.png');"></div>
+        <div class="service-row-content">
+          <div class="service-row-num">03</div>
+          <h3>Adipiscing Elit</h3>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
+        </div>
       </div>
     </div>
   </div>
@@ -375,16 +388,18 @@ footer { background: #18181B; padding: 3rem 0 1.5rem; }
       </div>
       <form class="contact-form">
         <div class="form-row">
-          <div class="form-group"><label>Name</label><input type="text" placeholder="Lorem ipsum"></div>
-          <div class="form-group"><label>Company</label><input type="text" placeholder="Dolor sit amet"></div>
-        </div>
+          <div class="form-group"><label>Lorem Ipsum</label><input type="text" placeholder="Lorem ipsum"></div>
+          <div class="form-row">
+            <div class="form-group"><label>Sit Amet</label><input type="email" placeholder="lorem@ipsum.com"></div>
+            <div class="form-group"><label>Consectetur</label><input type="tel" placeholder="(555) 000-0000"></div>
+          </div>
         <div class="form-row">
           <div class="form-group"><label>Email</label><input type="email" placeholder="lorem@ipsum.com"></div>
           <div class="form-group"><label>Phone</label><input type="tel" placeholder="(555) 000-0000"></div>
         </div>
-        <div class="form-group"><label>Project Type</label><select><option>Consectetur adipiscing...</option><option>Exhibit Fabrication</option><option>Custom Millwork</option><option>I&D Services</option></select></div>
+        <div class="form-group"><label>Project Type</label><select><option>Consectetur adipiscing...</option><option>Lorem ipsum dolor</option><option>Sit amet consectetur</option><option>Adipiscing elit</option></select></div>
         <div class="form-group"><label>Message</label><textarea placeholder="Lorem ipsum dolor sit amet..."></textarea></div>
-        <button type="submit" class="btn btn-primary" style="width:100%;">Send Inquiry</button>
+        <button type="submit" class="btn btn-primary" style="width:100%;">Lorem Ipsum Dolor</button>
       </form>
     </div>
   </div>
@@ -394,16 +409,16 @@ footer { background: #18181B; padding: 3rem 0 1.5rem; }
   <div class="container">
     <div class="footer-grid">
       <div class="footer-col">
-        <img src="../Assets/logos/DGI-LOGO%20(Black).png" alt="DGI" class="footer-logo">
+        <img src="../Assets/logos/DGI-LOGO%20(Black).png" alt="Lorem Ipsum" class="footer-logo">
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
       </div>
       <div class="footer-col">
-        <h4>Navigate</h4>
-        <a href="#services">Services</a>
-        <a href="#portfolio">Portfolio</a>
-        <a href="#about">About</a>
-        <a href="#faq">FAQ</a>
-        <a href="#contact">Contact</a>
+        <h4>Lorem Ipsum</h4>
+        <a href="#services">Lorem Ipsum</a>
+        <a href="#portfolio">Dolor Sit</a>
+        <a href="#about">Amet Consectetur</a>
+        <a href="#faq">Adipiscing</a>
+        <a href="#contact">Elit Sed Do</a>
       </div>
       <div class="footer-col">
         <h4>Services</h4>
@@ -413,14 +428,14 @@ footer { background: #18181B; padding: 3rem 0 1.5rem; }
         <a href="#services">Adipiscing Elit</a>
       </div>
       <div class="footer-col">
-        <h4>Contact</h4>
+        <h4>Lorem Ipsum</h4>
         <a href="mailto:lorem@ipsumdolor.com">lorem@ipsumdolor.com</a>
         <p>Mon – Fri &middot; 7am – 6pm</p>
         <p>2100 Lorem Ipsum Rd, Bay 21<br>Dolor Sit Amet, ST 89102</p>
       </div>
     </div>
     <div class="footer-bottom">
-      <span>&copy; 2026 DGI. Lorem ipsum dolor sit amet.</span>
+      <span>&copy; 2026 Lorem Ipsum. Dolor sit amet consectetur.</span>
       <span>Lorem ipsum dolor sit amet consectetur.</span>
     </div>
   </div>
